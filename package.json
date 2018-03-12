@@ -1,0 +1,42 @@
+{
+  "name": "cxswow.github.io",
+  "version": "0.0.1",
+  "description": "my blog",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint",
+    "gatsby": "./node_modules/.bin/gatsby",
+    "develop": "./node_modules/.bin/gatsby develop",
+    "build": "./node_modules/.bin/gatsby build",
+    "serve": "./node_modules/.bin/gatsby serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cxswow/cxswow.github.io.git"
+  },
+  "keywords": [
+    "react",
+    "gatsby",
+    "blog"
+  ],
+  "author": "chenxiaoshan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cxswow/cxswow.github.io/issues"
+  },
+  "homepage": "https://github.com/cxswow/cxswow.github.io#readme",
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "gatsby": "^1.9.231"
+  },
+  "dependencies": {
+    "gatsby-link": "^1.6.39",
+    "gatsby-plugin-react-helmet": "^2.0.7",
+    "react": "^16.2.0",
+    "react-helmet": "^5.2.0"
+  }
+}
