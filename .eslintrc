@@ -3,6 +3,10 @@
     "airbnb",
   ],
   "rules": {
-    "semi": "off"
+    "semi": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "env":{
+    "browser": true,
   }
 }
