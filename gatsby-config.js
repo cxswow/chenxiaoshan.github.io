@@ -1,3 +1,10 @@
 module.exports = {
-  plugins: [`gatsby-plugin-react-helmet`],
+  siteMetadata: {
+    title: `cxswow OVO`,
+    author: `chenxiaoshan`,
+  },
+  plugins: [
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+  ],
 }

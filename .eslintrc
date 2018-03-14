@@ -4,7 +4,8 @@
   ],
   "rules": {
     "semi": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "global-require": "off",
   },
   "env":{
     "browser": true,
