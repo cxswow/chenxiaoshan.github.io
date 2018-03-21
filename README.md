@@ -1,9 +1,11 @@
 # cxswow.github.io
-个人博客。
-主要用到了：
-* [Gatsby](https://github.com/gatsbyjs/gatsby)
+个人[博客](https://cxswow.github.io/)。
 
-# Get started
+相关：
+* [Gatsby](https://github.com/gatsbyjs/gatsby)
+* [KyleAMathews's Blog](https://github.com/KyleAMathews/blog)
+
+# 使用
 ``` bash
 npm i
 
