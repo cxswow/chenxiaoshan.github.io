@@ -1,0 +1,111 @@
+<!DOCTYPE html><html><head><link rel="preload" href="/component---src-layouts-index-js-bbab089550a358b83ffa.js" as="script"/><link rel="preload" href="/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js" as="script"/><link rel="preload" href="/path---blog-2017-02-06-config-eslint-with-file-c1fec9d6646c6d611c64.js" as="script"/><link rel="preload" href="/app-a3030df141a9153ac7e9.js" as="script"/><link rel="preload" href="/commons-a6e237db30813b24a7cc.js" as="script"/><style data-styled-components="gNqeEl iZkCae EPWvR eKRSxE">
+/* sc-component-id: sc-bdVaJa */
+.gNqeEl{margin:0;padding:0;border:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.gNqeEl{width:700px;}} @media (max-width:500px){.gNqeEl{width:500px;}}
+/* sc-component-id: sc-bwzfXH */
+.EPWvR{position:fixed;z-index:2;top:0;left:0;}
+/* sc-component-id: sc-htpNat */
+.eKRSxE{display:block;width:3rem;margin:0.5rem;pading:1rem;background:#000;text-align:center;color:#fff;}
+/* sc-component-id: sc-bxivhb */
+.iZkCae{margin:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.iZkCae{width:700px;}} @media (max-width:500px){.iZkCae{width:500px;}}</style><title data-react-helmet="true">cxswow | 通过文件配置 ESLint</title><meta data-react-helmet="true" name="description"/><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="icon" type="image/png" sizes="64x64" href="/static/logo.05897cef.png"/><style id="gatsby-inlined-css">p,ul{line-height:1.8}a{color:blue;text-decoration:none}code{background:#eee}code,code[class*=language-],pre[class*=language-]{font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace}code[class*=language-],pre[class*=language-]{color:#f8f8f2;background:none;text-shadow:0 1px rgba(0,0,0,.3);text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#272822}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#f8f8f2}.namespace{opacity:.7}.token.constant,.token.deleted,.token.property,.token.symbol,.token.tag{color:#f92672}.token.boolean,.token.number{color:#ae81ff}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#a6e22e}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f8f8f2}.token.atrule,.token.attr-value,.token.function{color:#e6db74}.token.keyword{color:#66d9ef}.token.important,.token.regex{color:#fd971f}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style></head><body><div id="___gatsby"><div class="sc-bdVaJa gNqeEl" data-reactroot="" data-reactid="1" data-react-checksum="2108845205"><!-- react-empty: 2 --><div class="sc-bxivhb iZkCae" data-reactid="3"><!-- react-empty: 4 --><div class="sc-bwzfXH EPWvR" data-reactid="5"><a class="sc-htpNat eKRSxE" href="/blog" data-reactid="6">All</a><a class="sc-htpNat eKRSxE" href="/blog/tags" data-reactid="7">Tags</a></div><div data-reactid="8"><h1 data-reactid="9">通过文件配置 ESLint</h1><div data-reactid="10"><h1>简介</h1>
+<p>ESLint 是一个代码书写规范检查工具，通过很多规则检查来规范代码的书写风格，也可以找出一些错误。<a href="http://eslint.org/docs/rules/">ESLint 文档</a>里列出了规则说明，规则详细说明里也有示例。上述网站里也有用户指南、<a href="http://eslint.cn/docs/rules/">中文版本</a>。
+有很多 ESLint 的 config 实践可能比直接用 ESLint 更适合自己，我用的就是 <a href="https://github.com/airbnb/javascript">airbnb</a> 的。</p>
+<h1>使用</h1>
+<h3>项目里安装</h3>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> eslint
+</code></pre>
+      </div>
+<p>为了使用方便，在 package.json 里的 <code class="language-text">scripts</code> 里添加</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token string">"lint"</span><span class="token keyword">:</span> <span class="token string">"./node_modules/.bin/eslint"</span>
+</code></pre>
+      </div>
+<p>然后就可以在命令行里使用以下命令来对文件或文件夹进行 ESLint 检查了。</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run lint 文件/文件夹
+</code></pre>
+      </div>
+<p>如果要用别的 config 实践的要按照可以看它们自己的安装说明进行额外的安装。</p>
+<h3>配置文件</h3>
+<p>在项目目录里添加 <code class="language-text">.eslintrc.*</code> 文件，ESLint 会自动读取它。
+文件格式：</p>
+<ul>
+<li>.eslintrc.json</li>
+<li>.eslintrc.js: javascript 格式的配置信息，通过 <code class="language-text">exports</code> 一个对象来配置</li>
+<li>.eslintrc.yml</li>
+<li>.eslintrc.yaml</li>
+<li>.eslintrc: yml 或 json 格式</li>
+</ul>
+<p>也可以在 package.json 里添加 eslintConfig 来写入配置信息。</p>
+<h3>配置信息</h3>
+<h4>extends</h4>
+<p>继承已启用的规则配置，一般使用：</p>
+<div class="gatsby-highlight">
+      <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"extends"</span><span class="token operator">:</span> <span class="token string">"eslint:recommended"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>这里配置的规则是 <a href="http://eslint.org/docs/rules/">ESLint 文档</a>里打勾的规则。
+我用的 eslint-config-airbnb 是：</p>
+<div class="gatsby-highlight">
+      <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h4>env</h4>
+<p>配置启用环境，要启用的环境写在这里，并设置为 <code class="language-text">true</code> ，如：</p>
+<div class="gatsby-highlight">
+      <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"browser"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">"node"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h4>rule</h4>
+<p>在 extends 里指定了设定好要启用的规则，但是很多时候有部分不一样，在这里可以设置让 extends 里部分规则不启用。rule 的使用要谨慎。
+像在 airbnb 里面启用了分号检查，即必须使用分号，而我不想使用分号，配置如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"extends"</span><span class="token operator">:</span> <span class="token string">"airbnb"</span><span class="token punctuation">,</span>
+  <span class="token property">"rule"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"semi"</span><span class="token operator">:</span> “off"
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p>这里的 <code class="language-text">semi</code> 就是分号检查规则。
+eslint 里很多规则记不住谁是谁的话，在用 eslint 检查后它告诉你违背了哪些规则，然后在文档里查这些规则就可以知道规则具体说明，然后就可以选择是否使用它。规则值：</p>
+<ul>
+<li>“off” 或 0 - 关闭规则</li>
+<li>“warn” 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)</li>
+<li>“error” 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)</li>
+</ul>
+<h4>plugins</h4>
+<p>第三方插件配置，使用前要 npm 安装它。
+插件名称可以省略 <code class="language-text">eslint-plugin-</code> 前缀。</p>
+<div class="gatsby-highlight">
+      <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"plugins"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"plugin1"</span><span class="token punctuation">,</span>
+    <span class="token string">"eslint-plugin-plugin2"</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<h4>globals</h4>
+<p> 很多默认开启规则的 config 都不允许使用全局变量，它们被认为是未定义的变量，由 no-undef 规则来发出警告。所以如果要使用全局变量的话，推荐做法是在配置文件里的 globals 里声明它(等于 <code class="language-text">true</code> 允许变量被重写，<code class="language-text">false</code> 不允许变量被重写)：</p>
+<div class="gatsby-highlight">
+      <pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"globals"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"globalsVar1"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">"globalsVar2"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+<p><strong>参考</strong>：</p>
+<p><a href="http://eslint.cn/docs/rules/">ESLint 中文</a></p></div><em data-reactid="11"><!-- react-text: 12 -->标签：<!-- /react-text --><span data-reactid="13"><a href="/blog/tags/es-lint/" data-reactid="14">ESLint</a><span data-reactid="15"> | </span></span><span data-reactid="16"><a href="/blog/tags/js/" data-reactid="17">JS</a></span></em><p data-reactid="18">2017-02-06</p></div></div></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-a3030df141a9153ac7e9.js","107818501498521":"component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","77653406118394":"component---src-templates-tag-page-js-c5f013927e89fb752651.js","162898551421021":"component---src-pages-404-js-e6c65978b6fa79ced234.js","152176518627018":"component---src-pages-blog-index-js-f37a3e89116e6c3ef634.js","121586416807847":"component---src-pages-blog-tags-js-3d074e28091772844f50.js","35783957827783":"component---src-pages-index-js-adfaba1e0f468f50acdb.js","60335399758886":"path----557518bd178906f8d58a.js","40375810615591":"path---blog-2016-12-23-img-srcset-sizes-picture-3d88680e63edf1622620.js","196993793981773":"path---blog-2017-02-06-config-eslint-with-file-c1fec9d6646c6d611c64.js","159968386082061":"path---blog-2017-08-06-config-nginx-server-handbook-ff025f0718c08235eec6.js","59090691286662":"path---blog-2017-08-18-node-js-event-loop-979c7b1373965dc8f92d.js","185853751476360":"path---blog-2017-08-18-nodejs-cli-5d6411e9b791c2b083bd.js","210764608676883":"path---blog-2018-03-19-what-is-google-v-8-2dcbd1c1fa17266fab71.js","35922930818165":"path---blog-tags-html-8ab0ef81c3afb65dd9d9.js","136741174138696":"path---blog-tags-es-lint-d4b9a5fa8f1f2d7bb669.js","40059224460927":"path---blog-tags-js-be777571d32ea43f2964.js","199662278216656":"path---blog-tags-nginx-616f7bfa347158df179b.js","197307841559478":"path---blog-tags-visual-box-07a28d4e9577f201807c.js","82163053159536":"path---blog-tags-node-js-42cf20a77a32f8482dba.js","254022195166212":"path---404-a0e39f21c11f6a62c5ab.js","49683490770531":"path---blog-0f3b6cdf314906f2d4c7.js","186779927453684":"path---blog-tags-0e3f58dd753dea443c75.js","142629428675168":"path---index-7019934553236f36cced.js","178698757827068":"path---404-html-a0e39f21c11f6a62c5ab.js","114276838955818":"component---src-layouts-index-js-bbab089550a358b83ffa.js"}/*]]>*/</script><script>/*<![CDATA[*/!function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",["/commons-a6e237db30813b24a7cc.js","/app-a3030df141a9153ac7e9.js","/path---blog-2017-02-06-config-eslint-with-file-c1fec9d6646c6d611c64.js","/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","/component---src-layouts-index-js-bbab089550a358b83ffa.js"])/*]]>*/</script></body></html>

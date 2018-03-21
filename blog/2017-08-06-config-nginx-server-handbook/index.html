@@ -1,0 +1,781 @@
+<!DOCTYPE html><html><head><link rel="preload" href="/component---src-layouts-index-js-bbab089550a358b83ffa.js" as="script"/><link rel="preload" href="/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js" as="script"/><link rel="preload" href="/path---blog-2017-08-06-config-nginx-server-handbook-ff025f0718c08235eec6.js" as="script"/><link rel="preload" href="/app-a3030df141a9153ac7e9.js" as="script"/><link rel="preload" href="/commons-a6e237db30813b24a7cc.js" as="script"/><style data-styled-components="gNqeEl iZkCae EPWvR eKRSxE">
+/* sc-component-id: sc-bdVaJa */
+.gNqeEl{margin:0;padding:0;border:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.gNqeEl{width:700px;}} @media (max-width:500px){.gNqeEl{width:500px;}}
+/* sc-component-id: sc-bwzfXH */
+.EPWvR{position:fixed;z-index:2;top:0;left:0;}
+/* sc-component-id: sc-htpNat */
+.eKRSxE{display:block;width:3rem;margin:0.5rem;pading:1rem;background:#000;text-align:center;color:#fff;}
+/* sc-component-id: sc-bxivhb */
+.iZkCae{margin:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.iZkCae{width:700px;}} @media (max-width:500px){.iZkCae{width:500px;}}</style><title data-react-helmet="true">cxswow | 使用 VisualBox、nginx 搭建双向验证的网站</title><meta data-react-helmet="true" name="description"/><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="icon" type="image/png" sizes="64x64" href="/static/logo.05897cef.png"/><style id="gatsby-inlined-css">p,ul{line-height:1.8}a{color:blue;text-decoration:none}code{background:#eee}code,code[class*=language-],pre[class*=language-]{font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace}code[class*=language-],pre[class*=language-]{color:#f8f8f2;background:none;text-shadow:0 1px rgba(0,0,0,.3);text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#272822}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#f8f8f2}.namespace{opacity:.7}.token.constant,.token.deleted,.token.property,.token.symbol,.token.tag{color:#f92672}.token.boolean,.token.number{color:#ae81ff}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#a6e22e}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f8f8f2}.token.atrule,.token.attr-value,.token.function{color:#e6db74}.token.keyword{color:#66d9ef}.token.important,.token.regex{color:#fd971f}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style></head><body><div id="___gatsby"><div class="sc-bdVaJa gNqeEl" data-reactroot="" data-reactid="1" data-react-checksum="-1485864231"><!-- react-empty: 2 --><div class="sc-bxivhb iZkCae" data-reactid="3"><!-- react-empty: 4 --><div class="sc-bwzfXH EPWvR" data-reactid="5"><a class="sc-htpNat eKRSxE" href="/blog" data-reactid="6">All</a><a class="sc-htpNat eKRSxE" href="/blog/tags" data-reactid="7">Tags</a></div><div data-reactid="8"><h1 data-reactid="9">使用 VisualBox、nginx 搭建双向验证的网站</h1><div data-reactid="10"><h1>简介</h1>
+<p>记录我在 mac 上用 VisualBox 建立虚拟服务机后通过 nginx 搭建双向验证的网站的过程，包括虚拟机的建立、文件共享设置、虚拟机网络设置、SSH 连接虚拟机、nginx 配置。</p>
+<h1>Linux Server （ubuntu） 的建立</h1>
+<p>用 VisualBox 建立一个 Linux Server 虚拟机（ubuntu-16.04.2-server-amd64），建立过程除了存储那边改选了固定大小其它的都是默认的选项。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/1-0f3eb7c733dba228255e594946cc7dd3-1dd78.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 572px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 64.6853146853147%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEF/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/2gAMAwEAAhADEAAAAdlagL//xAAXEAADAQAAAAAAAAAAAAAAAAAAARAR/9oACAEBAAEFAmJXZ//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABsQAAIBBQAAAAAAAAAAAAAAAAARQQEQIWGh/9oACAEBAAE/IaoN/LLLJDZ//9oADAMBAAIAAwAAABAvD//EABYRAAMAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAwEBPxAVf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8QP//EABsQAAIDAAMAAAAAAAAAAAAAAAERACFBMVHB/9oACAEBAAE/EGcGDFlhDohZdd7MBUBBEKPkBXM//9k='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="虚拟机建立向导首页"
+        title=""
+        src="/static/1-0f3eb7c733dba228255e594946cc7dd3-1dd78.jpeg"
+        srcset="/static/1-0f3eb7c733dba228255e594946cc7dd3-7301d.jpeg 197w,
+/static/1-0f3eb7c733dba228255e594946cc7dd3-2f23e.jpeg 393w,
+/static/1-0f3eb7c733dba228255e594946cc7dd3-1dd78.jpeg 572w"
+        sizes="(max-width: 572px) 100vw, 572px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/2-8de157c8db6a545c981e668c0137203d-c7ff0.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 666px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 66.36636636636636%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAew3SA//xAAXEAEAAwAAAAAAAAAAAAAAAAABABEg/9oACAEBAAEFAmF5/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAIP/aAAgBAQAGPwJf/8QAGxAAAgEFAAAAAAAAAAAAAAAAABEBEDFhcaH/2gAIAQEAAT8hdYILbpujGz//2gAMAwEAAgADAAAAEEMP/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPxA//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAGRABAQEBAQEAAAAAAAAAAAAAAREAITFh/9oACAEBAAE/ELIgxoMHmAgR3TtqfDcnA1db/9k='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="虚拟机建立向导存储选择"
+        title=""
+        src="/static/2-8de157c8db6a545c981e668c0137203d-c7ff0.jpeg"
+        srcset="/static/2-8de157c8db6a545c981e668c0137203d-96504.jpeg 197w,
+/static/2-8de157c8db6a545c981e668c0137203d-91681.jpeg 393w,
+/static/2-8de157c8db6a545c981e668c0137203d-c7ff0.jpeg 666w"
+        sizes="(max-width: 666px) 100vw, 666px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>之后就是安装系统。在虚拟机的设置里选择存储那一项的控制器 IDE 里的光驱选择要装的系统的镜像文件文件，确认后启动虚拟机装好系统。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/3-7808e9c8e7974ccf5b42a6db453706f1-afd18.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 672px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 87.94642857142857%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAASABQDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAAAAECAwX/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/2gAMAwEAAhADEAAAAetbaiQkoGA3n//EABYQAAMAAAAAAAAAAAAAAAAAACIwQf/aAAgBAQABBQIkX//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQMBAT8BH//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EABYQAAMAAAAAAAAAAAAAAAAAADAyof/aAAgBAQAGPwJaH//EABkQAQEBAAMAAAAAAAAAAAAAAAERACAhQf/aAAgBAQABPyEMzN8mpOKtdu//2gAMAwEAAgADAAAAEOzAAP/EABURAQEAAAAAAAAAAAAAAAAAAAEg/9oACAEDAQE/EAj/xAAWEQEBAQAAAAAAAAAAAAAAAAABABD/2gAIAQIBAT8QXS//xAAdEAACAgIDAQAAAAAAAAAAAAABEQAhMWEQQVGR/9oACAEBAAE/EPW1g4BBYF9h4ltE2YAAyPsQZI74TzDiL9D91P/Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="虚拟机系统镜像文件选择前"
+        title=""
+        src="/static/3-7808e9c8e7974ccf5b42a6db453706f1-afd18.jpeg"
+        srcset="/static/3-7808e9c8e7974ccf5b42a6db453706f1-83526.jpeg 197w,
+/static/3-7808e9c8e7974ccf5b42a6db453706f1-ecec5.jpeg 393w,
+/static/3-7808e9c8e7974ccf5b42a6db453706f1-afd18.jpeg 672w"
+        sizes="(max-width: 672px) 100vw, 672px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/4-b55cc33f26efb0c5dc621a0985e104d5-afd18.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 672px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 87.94642857142857%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAASABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAMBBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAeytI0AAH//EABUQAQEAAAAAAAAAAAAAAAAAABEw/9oACAEBAAEFAiP/xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/AR//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAUEAEAAAAAAAAAAAAAAAAAAAAw/9oACAEBAAY/Ah//xAAcEAACAgIDAAAAAAAAAAAAAAAAARARITFBUZH/2gAIAQEAAT8hTdP008RwUrKlH//aAAwDAQACAAMAAAAQkwAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAwEBPxAf/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPxAf/8QAGxABAQEAAgMAAAAAAAAAAAAAAREAMUEhUZH/2gAIAQEAAT8Qfb4/vFgq+lyvWEBUyyUroOtLnjcDf//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="虚拟机系统镜像文件选择后"
+        title=""
+        src="/static/4-b55cc33f26efb0c5dc621a0985e104d5-afd18.jpeg"
+        srcset="/static/4-b55cc33f26efb0c5dc621a0985e104d5-83526.jpeg 197w,
+/static/4-b55cc33f26efb0c5dc621a0985e104d5-ecec5.jpeg 393w,
+/static/4-b55cc33f26efb0c5dc621a0985e104d5-afd18.jpeg 672w"
+        sizes="(max-width: 672px) 100vw, 672px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<h1>文件共享</h1>
+<p>为了实现虚拟机与 mac 文件共享要安装增强功能，主机上根据  ubuntu 的版本下载 <a href="http://download.virtualbox.org/virtualbox/">VBoxGuestAdditions 镜像文件</a>，然后和装系统时一样地在设置里的存储里增加这个镜像文件，在虚拟机界面的 Devices -> Optical Drives 里确保 VBoxGuestAdditions.iso 是打勾被选中的，然后在虚拟机里运行：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mount</span> /dev/cdrom /media/cdrom
+</code></pre>
+      </div>
+<p>进入 /media/cdrom 里面可以看到一些可执行文件，执行：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> ./VBoxGuestAdditions.run
+</code></pre>
+      </div>
+<p>重启虚拟机：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">reboot</span>
+</code></pre>
+      </div>
+<p>在虚拟机的设置里创建一个固定分配共享文件夹：</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/5-34451b21a9d77146432a1fe0515cb8f5-9b039.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 669px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 55.90433482810164%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAew2Io//xAAYEAACAwAAAAAAAAAAAAAAAAAAAREgIf/aAAgBAQABBQKBG0//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAY/Al//xAAaEAADAAMBAAAAAAAAAAAAAAAAAREQITFR/9oACAEBAAE/Ibgm/GOHxFxT/9oADAMBAAIAAwAAABCoD//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8QP//EABURAQEAAAAAAAAAAAAAAAAAABAR/9oACAECAQE/EKf/xAAZEAEAAwEBAAAAAAAAAAAAAAABABEhQTH/2gAIAQEAAT8Qr0VuNwC12NA9mZBT6xe9lnVuf//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="创建共享文件夹"
+        title=""
+        src="/static/5-34451b21a9d77146432a1fe0515cb8f5-9b039.jpeg"
+        srcset="/static/5-34451b21a9d77146432a1fe0515cb8f5-a5809.jpeg 197w,
+/static/5-34451b21a9d77146432a1fe0515cb8f5-ff862.jpeg 393w,
+/static/5-34451b21a9d77146432a1fe0515cb8f5-9b039.jpeg 669w"
+        sizes="(max-width: 669px) 100vw, 669px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>共享文件夹自动挂载在虚拟机的 /media 目录下，名称是 sf_ 加上共享文件夹的名称。这时访问共享文件目录非 root 用户会出现权限问题（一般登录的都是非 root 用户）：</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/6-b93f418119bdc9e3184556a8e38ea384-0004e.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 334px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 11.377245508982037%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAACABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAMF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAByARB/8QAFhAAAwAAAAAAAAAAAAAAAAAAAhAx/9oACAEBAAEFAkV//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJ//8QAFhAAAwAAAAAAAAAAAAAAAAAAARAx/9oACAEBAAE/ITXf/9oADAMBAAIAAwAAABAAD//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8QP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8QP//EABgQAQADAQAAAAAAAAAAAAAAAAEAESFB/9oACAEBAAE/EE5vI9e2wBkrJ//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="访问共享文件夹权限问题"
+        title=""
+        src="/static/6-b93f418119bdc9e3184556a8e38ea384-0004e.jpeg"
+        srcset="/static/6-b93f418119bdc9e3184556a8e38ea384-b60b7.jpeg 197w,
+/static/6-b93f418119bdc9e3184556a8e38ea384-0004e.jpeg 334w"
+        sizes="(max-width: 334px) 100vw, 334px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>运行以下命令：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">usermod</span> -aG vboxsf 当前登录的用户名 <span class="token comment"># 如：sudo usermod -aG vboxsf cxswow</span>
+</code></pre>
+      </div>
+<p>重启虚拟机生效：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">reboot</span>
+</code></pre>
+      </div>
+<p>共享文件完成。</p>
+<h1>网络设置：NAT+Host-Only</h1>
+<p> 虚拟机设置里默认的网络是只有一张使用 NAT 的网卡，这时虚拟机可以上网，但是主机和虚拟机不互通，因此我要加一张网卡来让主机可以访问虚拟机，用的 Host-Only 模式。
+在虚拟机关机的情况下打开虚拟机的设置 -> 网络，网卡1默认的不用修改，打开网卡2，启用网卡2的网络连接，连接方式选 Host-Only，</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/7-687e5b9298d4d9292387d1ac76ade70a-afd18.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 672px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 49.25595238095239%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAKABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAECBf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhADEAAAAdeqBDD/xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAEFAl//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAY/Al//xAAaEAACAgMAAAAAAAAAAAAAAAAAARBBESHB/9oACAEBAAE/Iba6LVmZR//aAAwDAQACAAMAAAAQgw//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAcEAADAAEFAAAAAAAAAAAAAAAAARExECFBUbH/2gAIAQEAAT8QV2DS4dFNfRfejwYI/9k='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="虚拟机网卡2"
+        title=""
+        src="/static/7-687e5b9298d4d9292387d1ac76ade70a-afd18.jpeg"
+        srcset="/static/7-687e5b9298d4d9292387d1ac76ade70a-83526.jpeg 197w,
+/static/7-687e5b9298d4d9292387d1ac76ade70a-ecec5.jpeg 393w,
+/static/7-687e5b9298d4d9292387d1ac76ade70a-afd18.jpeg 672w"
+        sizes="(max-width: 672px) 100vw, 672px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>这里要有一个界面名称，如果没有可选的，在 VirtualBox 的设置 -> 网络里的 Host-Only 界面增加一个，用默认的设置就行。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/8-e19e95aca775467c5449355daeaa11a5-8ff30.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 550px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 67.09090909090911%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAIF/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/2gAMAwEAAhADEAAAAdpQhSP/xAAXEAEBAQEAAAAAAAAAAAAAAAABABEQ/9oACAEBAAEFAsbGVLbef//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABQQAQAAAAAAAAAAAAAAAAAAACD/2gAIAQEABj8CX//EABkQAAIDAQAAAAAAAAAAAAAAAAABESGhMf/aAAgBAQABPyGruiW+6MIjSRMdn//aAAwDAQACAAMAAAAQs+//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAZEAEAAwEBAAAAAAAAAAAAAAABABEhYVH/2gAIAQEAAT8QHwjzcvlE6ohV+kAFZEBaMgvbP//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="增加一个 Host-Only "
+        title=""
+        src="/static/8-e19e95aca775467c5449355daeaa11a5-8ff30.jpeg"
+        srcset="/static/8-e19e95aca775467c5449355daeaa11a5-3a90a.jpeg 197w,
+/static/8-e19e95aca775467c5449355daeaa11a5-3dc49.jpeg 393w,
+/static/8-e19e95aca775467c5449355daeaa11a5-8ff30.jpeg 550w"
+        sizes="(max-width: 550px) 100vw, 550px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>打开虚拟机，编辑网络设置文件：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> vim /etc/network/interfaces
+</code></pre>
+      </div>
+<p>我的文件初始内容是这样的：</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/9-40adbd1a8b37dcfc67db66cdbb3f0fe0-ab697.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 566px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 40.10600706713781%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAIABQDASIAAhEBAxEB/8QAFwABAAMAAAAAAAAAAAAAAAAAAAEDBf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHLrEgL/8QAFhAAAwAAAAAAAAAAAAAAAAAAAAMT/9oACAEBAAEFAqsLNLNP/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFxAAAwEAAAAAAAAAAAAAAAAAAAIzkf/aAAgBAQAGPwKjaUbSjaf/xAAWEAEBAQAAAAAAAAAAAAAAAAAAAfH/2gAIAQEAAT8hszqWyf/aAAwDAQACAAMAAAAQB8//xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPxAn/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPxA//8QAGxAAAgEFAAAAAAAAAAAAAAAAAAHRETFxscH/2gAIAQEAAT8QrG5I03YzG/lMf//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="网络设置文件初始内容"
+        title=""
+        src="/static/9-40adbd1a8b37dcfc67db66cdbb3f0fe0-ab697.jpeg"
+        srcset="/static/9-40adbd1a8b37dcfc67db66cdbb3f0fe0-d3268.jpeg 197w,
+/static/9-40adbd1a8b37dcfc67db66cdbb3f0fe0-34c59.jpeg 393w,
+/static/9-40adbd1a8b37dcfc67db66cdbb3f0fe0-ab697.jpeg 566w"
+        sizes="(max-width: 566px) 100vw, 566px"
+      />
+    </span>
+  </span>
+  
+  </a>
+     </p>
+<p> 这里的 <code class="language-text">auto</code> 后面跟的是网卡名字，之后就是对这个网卡的一些设置。如果不知道对应的网卡的名字，运行以下命令可以查看当前网卡的信息：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">ip <span class="token function">link</span>
+</code></pre>
+      </div>
+<p>这里可以看到新增加的网卡名字（我的是 enp0s8），所以我的网络配置文件修改成以下这样：</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/10-e5de444a286e1a651d43c883d820f517-82ab3.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 545px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 53.94495412844037%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAECAwX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAHGcQqEH//EABgQAQADAQAAAAAAAAAAAAAAAAECECEx/9oACAEBAAEFAouLUeLX/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFhAAAwAAAAAAAAAAAAAAAAAAACAx/9oACAEBAAY/AiL/AP/EABoQAAIDAQEAAAAAAAAAAAAAAAABESExkaH/2gAIAQEAAT8hdqXYhb0N3SH9jo0dn//aAAwDAQACAAMAAAAQg8//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAYEAEBAQEBAAAAAAAAAAAAAAABEQAxQf/aAAgBAQABPxBSaPVumU50Y1oB4TMKOFU8ZKr3f//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="网络设置修改后"
+        title=""
+        src="/static/10-e5de444a286e1a651d43c883d820f517-82ab3.jpeg"
+        srcset="/static/10-e5de444a286e1a651d43c883d820f517-03ac5.jpeg 197w,
+/static/10-e5de444a286e1a651d43c883d820f517-2be7e.jpeg 393w,
+/static/10-e5de444a286e1a651d43c883d820f517-82ab3.jpeg 545w"
+        sizes="(max-width: 545px) 100vw, 545px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>重启虚拟机网络：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> /etc/init.d/networking restart
+</code></pre>
+      </div>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/11-e5de444a286e1a651d43c883d820f517-82ab3.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 545px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 53.94495412844037%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAALABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAECAwX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAHGcQqEH//EABgQAQADAQAAAAAAAAAAAAAAAAECECEx/9oACAEBAAEFAouLUeLX/8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFhAAAwAAAAAAAAAAAAAAAAAAACAx/9oACAEBAAY/AiL/AP/EABoQAAIDAQEAAAAAAAAAAAAAAAABESExkaH/2gAIAQEAAT8hdqXYhb0N3SH9jo0dn//aAAwDAQACAAMAAAAQg8//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAYEAEBAQEBAAAAAAAAAAAAAAABEQAxQf/aAAgBAQABPxBSaPVumU50Y1oB4TMKOFU8ZKr3f//Z'); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="初始网络信息"
+        title=""
+        src="/static/11-e5de444a286e1a651d43c883d820f517-82ab3.jpeg"
+        srcset="/static/11-e5de444a286e1a651d43c883d820f517-03ac5.jpeg 197w,
+/static/11-e5de444a286e1a651d43c883d820f517-2be7e.jpeg 393w,
+/static/11-e5de444a286e1a651d43c883d820f517-82ab3.jpeg 545w"
+        sizes="(max-width: 545px) 100vw, 545px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/12-6c57c174432f9a7c4e8cbe495eefe168-72d3b.jpeg"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 620px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 71.12903225806451%; position: relative; bottom: 0; left: 0; background-image: url('data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAECAwX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAHHIorEH//EABcQAAMBAAAAAAAAAAAAAAAAAAECEDH/2gAIAQEAAQUCXDFwz//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABYQAAMAAAAAAAAAAAAAAAAAAAAgMf/aAAgBAQAGPwIi/wD/xAAZEAACAwEAAAAAAAAAAAAAAAAAARARUWH/2gAIAQEAAT8hZvRbEULrsf/aAAwDAQACAAMAAAAQQM//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAcEAEAAgIDAQAAAAAAAAAAAAABABEhMRBBcaH/2gAIAQEAAT8Qur2cruBC2+7iZ2RDK7t0y65P3j//2Q=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="重启后网络信息"
+        title=""
+        src="/static/12-6c57c174432f9a7c4e8cbe495eefe168-72d3b.jpeg"
+        srcset="/static/12-6c57c174432f9a7c4e8cbe495eefe168-fe5a8.jpeg 197w,
+/static/12-6c57c174432f9a7c4e8cbe495eefe168-3cd1a.jpeg 393w,
+/static/12-6c57c174432f9a7c4e8cbe495eefe168-72d3b.jpeg 620w"
+        sizes="(max-width: 620px) 100vw, 620px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<h1>主机通过 ssh 连接虚拟机</h1>
+<h2>通过密码连接</h2>
+<p>确保虚拟机和客户端都装了 OpenSSL 的相关软件后——如果在主机上用 ssh 连接虚拟机被拒绝了（Connection refused）一般就是虚拟机没有安装 ssh，虚拟机安装 ssh 命令： <code class="language-text">sudo apt-get install openssh-client openssh-server</code>——主机直接通过终端的 ssh 命令就能连上服务端：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">ssh</span> 虚拟机用户名@虚拟机 IP 地址 <span class="token comment"># 如：ssh cxswow@192.168.56.101，这个 IP 是 Host-Only 的那个 IP</span>
+</code></pre>
+      </div>
+<p>第一次连接一个虚拟机的时候会警告你要连接的这个机之前未知，让你确认是否继续连接，输入 <code class="language-text">yes</code> 继续连接。然后会让你输入该机该用户的密码，输入正确后就连接成功，此时就可以像在虚拟机的终端里一样地使用了。</p>
+<p>退出连接输入：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token keyword">exit</span>
+</code></pre>
+      </div>
+<h2>使用别名连接</h2>
+<p>每一次连接都输入用户名和 IP 是一件比较繁琐的事，可以通过配置文件来给固定的用户名和 IP 对起别名，之后通过别名连接会方便点。</p>
+<p>做法是在客户端的用户根目录下的 .ssh 文件夹里建立  config 文件，文件内容如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"> Host myUbuntu
+ User cxswow
+ HostName 192.168.56.101
+</code></pre>
+      </div>
+<p>之后就可以通过下面的命令来连接了：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">ssh</span> myUbuntu
+</code></pre>
+      </div>
+<h2>使用证书连接</h2>
+<p>每次都输入密码也不是一个好的选择，通过密钥认证连接会方便安全点。</p>
+<p>在客户端的用户根目录下的 .ssh 目录下运行以下命令生成密钥对：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">ssh-keygen -b 1024 -t rsa
+</code></pre>
+      </div>
+<p>这里可选项 <code class="language-text">-b</code> 后面跟的是密钥的长度 1024 字节，最长 4096 字节，长度影响解密时间，一般 1024 或 2048 就足够了；可选项 <code class="language-text">-t</code> 后面跟的是加密方式，默认是 rsa，还要一种 dsa。
+生成时会提示输入密钥名字，默认名字是 id_rsa ，我给命名成 mymac 了，这里如果使用自己命名的密钥名字，之后将公钥传到虚拟机上的命令就要指定公钥，每次用 ssh 连接的时候也要指定签名的密钥(如：增加 <code class="language-text">-i mymac</code> 指定)。
+还会让你输入私钥短语，有的话安全点。</p>
+<p>之后运行下面语句将公钥传到虚拟机上：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">ssh-copy-id -i mymac.pub  myUbuntu
+</code></pre>
+      </div>
+<p><code class="language-text">-i</code>后面跟的是对应的公钥，如果创建密钥的时候用了非默认名字，这里就要指定。
+然后运行：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">ssh</span> -i mymac myUbuntu 
+</code></pre>
+      </div>
+<p>实现免密登录。但是这里如果创建密钥对的时候输入了密钥的短语，还是要输入短语的，想要每次连接连短语也不输入的话，可以运行：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">ssh-add ~/.ssh/mymac
+</code></pre>
+      </div>
+<p>来输入短语后缓存，之后连接就不用再输入额外的信息了。</p>
+<h1>nginx 配置</h1>
+<p>安装 nginx：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nginx
+</code></pre>
+      </div>
+<p>/etc/nginx/nginx.conf 就是 nginx 的配置文件，不过一般不将我们的网站的配置放在这里，而是在 /ect/nginx/sites-available 文件夹下，该文件夹下面初始有个演示的例子的配置文件 default，内容如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-text"><code class="language-text">##
+# You should look at the following URL&#39;s in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # SSL configuration
+        #
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+        #
+        # Note: You should disable gzip for SSL traffic.
+        # See: https://bugs.debian.org/773332
+        #
+        # Read up on ssl_ciphers to ensure a secure configuration.
+        # See: https://bugs.debian.org/765782
+        #
+        # Self signed certs generated by the ssl-cert package
+        # Don&#39;t use them in a production server!
+        #
+        # include snippets/snakeoil.conf;
+
+        root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #       include snippets/fastcgi-php.conf;
+        #
+        #       # With php7.0-cgi alone:
+        #       fastcgi_pass 127.0.0.1:9000;
+        #       # With php7.0-fpm:
+        #       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        #}
+
+        # deny access to .htaccess files, if Apache&#39;s document root
+        # concurs with nginx&#39;s one
+        #
+        #location ~ /\.ht {
+        #       deny all;
+        #}
+}
+
+
+# Virtual Host configuration for example.com
+#
+# You can move that to a different file under sites-available/ and symlink that
+# to sites-enabled/ to enable it.
+#
+#server {
+#       listen 80;
+#       listen [::]:80;
+#
+#       server_name example.com;
+#
+#       root /var/www/example.com;
+#       index index.html;
+#
+#       location / {
+#               try_files $uri $uri/ =404;
+#       }
+#}</code></pre>
+      </div>
+<p><code class="language-text">#</code> 后面是注释掉的内容，注释掉的内容很多是 nginx 的标准配置方法，去掉注释的内容后实际内容如下：</p>
+<div class="gatsby-highlight">
+      <pre class="language-text"><code class="language-text">server {
+        # 默认监听本机80端口
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # 指名 html 文件夹所在
+        root /var/www/html;
+
+        # 网站主页
+        index index.html index.htm index.nginx-debian.html;
+
+        # 访问的网址
+        server_name _;
+
+        # 路由详细配置
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}</code></pre>
+      </div>
+<p>我们可以通过拷贝默认配置文件再在上面修改成我们想要的配置，拷贝命令（假设要配置的网站是 <code class="language-text">example.com</code> ）：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">cp</span> /etc/nginx/sites-available/default /etc/nginx/sites-available/example.com
+</code></pre>
+      </div>
+<p>修改配置成：</p>
+<div class="gatsby-highlight">
+      <pre class="language-text"><code class="language-text">server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/example.com/html; # 自建的 html 的文件夹位置
+    index index.html index.htm; # 该文件夹下要有其中一个文件可以当主页
+
+    server_name example.com www.example.com; # 只是好看的网址，之后会说
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}</code></pre>
+      </div>
+<p>这里要注意的是 <code class="language-text">server_name</code> 后面跟的网址，如果像上面写的那样要修改 /etc/hosts 文件，该文件是本机访问的网站的名称和 ip 的映射，要用 example.com 这个域名来访问你的网址（本机访问，也就是虚拟机访问，好像这里并没什么用，因为这个虚拟机没有浏览器，好像还是要通过主机的浏览器访问虚拟机的 ip 来访问网站，不太懂）就要在 /etc/hosts 文件里加上一行，大概是这样的：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">127.0.0.1 localhost
+127.0.0.1 example.com
+</code></pre>
+      </div>
+<p>这样说起来直接写 <code class="language-text">server_name 127.0.0.1</code>更方便。</p>
+<p>保存该配置文件后启动或重启 nginx 后，主机可以通过访问虚拟机的 ip 来查看网站了，比如之前设置的是 192.168.56.101，那直接访问 192.168.56.101 就可以看到你指定的网站的主页了。 </p>
+<p> nginx 启动命令： <code class="language-text">sudo service nginx start</code> 。
+nginx 重启命令： <code class="language-text">sudo service nginx  restart</code> 。
+查看 nginx 目前情况： <code class="language-text">ps -ef | grep nginx</code> 。</p>
+<h2>单向验证的网站</h2>
+<p>要让这个网站变成 https 的网站要生成自己的 SSL 证书， 创建放证书的文件夹（之后配置文件里要写明证书位置，放在某个地方比较方便管理而已）：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> /etc/nginx/ssl
+</code></pre>
+      </div>
+<p>生成证书：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/nginx/ssl/example.key -out /etc/nginx/ssl/example.crt
+</code></pre>
+      </div>
+<p>生成的时候会问一些问题，按描述填写就行。问题像这样：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">Country Name <span class="token punctuation">(</span>2 letter code<span class="token punctuation">)</span> <span class="token punctuation">[</span>AU<span class="token punctuation">]</span>:CN
+State or Province Name <span class="token punctuation">(</span>full name<span class="token punctuation">)</span> <span class="token punctuation">[</span>Some-State<span class="token punctuation">]</span>:Beijing
+Locality Name <span class="token punctuation">(</span>eg, city<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>:BJ
+Organization Name <span class="token punctuation">(</span>eg, company<span class="token punctuation">)</span> <span class="token punctuation">[</span>Internet Widgits Pty Ltd<span class="token punctuation">]</span>:my company
+Organizational Unit Name <span class="token punctuation">(</span>eg, section<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>:tech
+Common Name <span class="token punctuation">(</span>e.g. server FQDN or YOUR name<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>:cxswow
+Email Address <span class="token punctuation">[</span><span class="token punctuation">]</span>:
+</code></pre>
+      </div>
+<p>生成的 example.crt 就是证书文件，example.key 是私钥。</p>
+<p>然后把配置文件修改成：</p>
+<div class="gatsby-highlight">
+      <pre class="language-text"><code class="language-text">server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        listen 443 ssl; # 新增加，ssl 默认监听的端口就是443，开启监听
+
+        root /var/www/example.com/html;
+        index index.html index.htm;
+
+        server_name  example.com www.example.com;
+        ssl_certificate /etc/nginx/ssl/example.crt; # 新增，声明证书
+        ssl_certificate_key /etc/nginx/ssl/example.key; # 新增，声明私钥
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}</code></pre>
+      </div>
+<p>重启 nginx ： <code class="language-text">sudo service nginx  restart</code> 。
+然后访问网站，这时候就是走的 https 。</p>
+<h2>双向验证的网站</h2>
+<p>双向验证最少要有三方，像是甲方、乙方、见证人这样的。这里一般叫 server、client、CA 。</p>
+<p>之前单向验证只生成了 server，而且 server 的证书是自己给自己签名的，这里的 server 证书和 client 证书都要 CA 来签发，之前的证书不能用了。</p>
+<p>所以 server 和 client 生成私钥和证书签名请求文件(Certificate Signing Request)：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># 生成 server 的私钥和证书签名请求文件，还是放在之前说的 /etc/nginx/ssl 文件夹里面，这里进入该文件夹执行下面的命令</span>
+<span class="token function">sudo</span> openssl genrsa -des3 -out server.key 1024
+<span class="token function">sudo</span> openssl req -new -key server.key -out server.csr
+
+<span class="token comment"># 生成 client 的私钥和证书签名请求文件</span>
+<span class="token function">sudo</span> openssl genrsa -des3 -out client.key 1024
+<span class="token function">sudo</span> openssl req -new -key client.key -out client.csr
+
+<span class="token comment"># 生成 CA 私钥和自签名证书</span>
+<span class="token function">sudo</span> openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout ca.key -out ca.crt
+</code></pre>
+      </div>
+<p>然后生成 ca 认证的 server 证书和 client 证书：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash"><span class="token comment"># ca 签发 server 证书</span>
+<span class="token function">sudo</span> openssl x509 -req -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt
+
+<span class="token comment"># ca 签发 client 证书</span>
+<span class="token function">sudo</span> openssl x509 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
+</code></pre>
+      </div>
+<p>而客户端证书要用在浏览器上，一般要转换成浏览器可以用的格式，这里转成 <code class="language-text">.p12</code> 格式：</p>
+<div class="gatsby-highlight">
+      <pre class="language-bash"><code class="language-bash">openssl pkcs12 -export -inkey client.key -in client.crt -out client.p12
+</code></pre>
+      </div>
+<p>这里会让你输入密码，是在证书导入浏览器的时候要输入的密码。</p>
+<p><code class="language-text">p12</code> 格式的文件在主机上知己双击运行安装就行。</p>
+<p>修改 nginx 的配置文件，对虚拟机上部署的 server 进行反向代理：</p>
+<div class="gatsby-highlight">
+      <pre class="language-text"><code class="language-text">server {
+        # 开启
+        ssl_verify_client on;
+        ssl_client_certificate /etc/nginx/ssl/ca.crt;
+        ssl on;
+        listen 443 ssl default_server;
+
+        # Add index.php to the list if you are using PHP
+        #index index.html index.htm index.nginx-debian.html;
+
+        server_name example.com www.example.com;
+        ssl_certificate /etc/nginx/ssl/server.crt;
+        ssl_certificate_key /etc/nginx/ssl/server.key;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+
+                proxy_pass http://localhost:8080/;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                # 当客户端证书认证通过后，将客户端证书中 Common Name 提取到 X-ClientCert-DN 头里
+                # 这样上游的 Node.JS Server 就可以从这里知道登录用户的身份了(名字)
+                proxy_set_header X-ClientCert-DN $ssl_client_s_dn;
+        }
+}</code></pre>
+      </div>
+<p>这里 <code class="language-text">proxy_pass</code> 就是别人访问虚拟机的默认443端口会返回的请求内容，这里要返回本机8080端口的内容，要另外自己开个 server 监听8080端口。</p>
+<p>在主机上安装 <code class="language-text">client.p12</code> 证书（双击文件可以直接安装），再访问 <code class="language-text">https://192.168.56.101</code> 的时候就可以选择 <code class="language-text">client.p12</code> 证书来进行验证了。</p>
+<p>8080端口的那个 server 也可以根据请求头的 Common Name 来返回不同的内容。</p>
+<p><strong>参考</strong>：</p>
+<p><a href="https://www.virtualbox.org/manual/ch04.html#mountingadditionsiso">Guest Additions</a></p>
+<p><a href="https://unix.stackexchange.com/questions/52667/file-permission-issues-with-shared-folders-under-virtual-box-ubuntu-guest-wind">File permission issues with shared folders under Virtual Box</a></p>
+<p><a href="http://www.jianshu.com/p/0736623e5806">VirtualBox 中 ubuntu 的网络设置</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html">SSH原理与运用（一）：远程登录</a></p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-14-04-lts">How To Set Up Nginx Server Blocks (Virtual Hosts) on Ubuntu 14.04 LTS</a></p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04">How To Create an SSL Certificate on Nginx for Ubuntu 14.04</a></p>
+<p><a href="https://www.theodo.fr/blog/2015/09/protect-your-node-js-api-with-nginx-and-ssl-client-certificates/">Protect your Node.js API with nginx and SSL client certificates</a></p>
+<p><a href="https://github.com/moonbingbing/openresty-best-practices/blob/master/ngx/reverse_proxy.md">反向代理</a></p></div><em data-reactid="11"><!-- react-text: 12 -->标签：<!-- /react-text --><span data-reactid="13"><a href="/blog/tags/nginx/" data-reactid="14">Nginx</a><span data-reactid="15"> | </span></span><span data-reactid="16"><a href="/blog/tags/visual-box/" data-reactid="17">VisualBox</a></span></em><p data-reactid="18">2017-08-06</p></div></div></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-a3030df141a9153ac7e9.js","107818501498521":"component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","77653406118394":"component---src-templates-tag-page-js-c5f013927e89fb752651.js","162898551421021":"component---src-pages-404-js-e6c65978b6fa79ced234.js","152176518627018":"component---src-pages-blog-index-js-f37a3e89116e6c3ef634.js","121586416807847":"component---src-pages-blog-tags-js-3d074e28091772844f50.js","35783957827783":"component---src-pages-index-js-adfaba1e0f468f50acdb.js","60335399758886":"path----557518bd178906f8d58a.js","40375810615591":"path---blog-2016-12-23-img-srcset-sizes-picture-3d88680e63edf1622620.js","196993793981773":"path---blog-2017-02-06-config-eslint-with-file-c1fec9d6646c6d611c64.js","159968386082061":"path---blog-2017-08-06-config-nginx-server-handbook-ff025f0718c08235eec6.js","59090691286662":"path---blog-2017-08-18-node-js-event-loop-979c7b1373965dc8f92d.js","185853751476360":"path---blog-2017-08-18-nodejs-cli-5d6411e9b791c2b083bd.js","210764608676883":"path---blog-2018-03-19-what-is-google-v-8-2dcbd1c1fa17266fab71.js","35922930818165":"path---blog-tags-html-8ab0ef81c3afb65dd9d9.js","136741174138696":"path---blog-tags-es-lint-d4b9a5fa8f1f2d7bb669.js","40059224460927":"path---blog-tags-js-be777571d32ea43f2964.js","199662278216656":"path---blog-tags-nginx-616f7bfa347158df179b.js","197307841559478":"path---blog-tags-visual-box-07a28d4e9577f201807c.js","82163053159536":"path---blog-tags-node-js-42cf20a77a32f8482dba.js","254022195166212":"path---404-a0e39f21c11f6a62c5ab.js","49683490770531":"path---blog-0f3b6cdf314906f2d4c7.js","186779927453684":"path---blog-tags-0e3f58dd753dea443c75.js","142629428675168":"path---index-7019934553236f36cced.js","178698757827068":"path---404-html-a0e39f21c11f6a62c5ab.js","114276838955818":"component---src-layouts-index-js-bbab089550a358b83ffa.js"}/*]]>*/</script><script>/*<![CDATA[*/!function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",["/commons-a6e237db30813b24a7cc.js","/app-a3030df141a9153ac7e9.js","/path---blog-2017-08-06-config-nginx-server-handbook-ff025f0718c08235eec6.js","/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","/component---src-layouts-index-js-bbab089550a358b83ffa.js"])/*]]>*/</script></body></html>

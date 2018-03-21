@@ -1,0 +1,395 @@
+<!DOCTYPE html><html><head><link rel="preload" href="/component---src-layouts-index-js-bbab089550a358b83ffa.js" as="script"/><link rel="preload" href="/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js" as="script"/><link rel="preload" href="/path---blog-2018-03-19-what-is-google-v-8-2dcbd1c1fa17266fab71.js" as="script"/><link rel="preload" href="/app-a3030df141a9153ac7e9.js" as="script"/><link rel="preload" href="/commons-a6e237db30813b24a7cc.js" as="script"/><style data-styled-components="gNqeEl iZkCae EPWvR eKRSxE">
+/* sc-component-id: sc-bdVaJa */
+.gNqeEl{margin:0;padding:0;border:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.gNqeEl{width:700px;}} @media (max-width:500px){.gNqeEl{width:500px;}}
+/* sc-component-id: sc-bwzfXH */
+.EPWvR{position:fixed;z-index:2;top:0;left:0;}
+/* sc-component-id: sc-htpNat */
+.eKRSxE{display:block;width:3rem;margin:0.5rem;pading:1rem;background:#000;text-align:center;color:#fff;}
+/* sc-component-id: sc-bxivhb */
+.iZkCae{margin:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.iZkCae{width:700px;}} @media (max-width:500px){.iZkCae{width:500px;}}</style><title data-react-helmet="true">cxswow | 什么是 Google V8</title><meta data-react-helmet="true" name="description"/><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="icon" type="image/png" sizes="64x64" href="/static/logo.05897cef.png"/><style id="gatsby-inlined-css">p,ul{line-height:1.8}a{color:blue;text-decoration:none}code{background:#eee}code,code[class*=language-],pre[class*=language-]{font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace}code[class*=language-],pre[class*=language-]{color:#f8f8f2;background:none;text-shadow:0 1px rgba(0,0,0,.3);text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#272822}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#f8f8f2}.namespace{opacity:.7}.token.constant,.token.deleted,.token.property,.token.symbol,.token.tag{color:#f92672}.token.boolean,.token.number{color:#ae81ff}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#a6e22e}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f8f8f2}.token.atrule,.token.attr-value,.token.function{color:#e6db74}.token.keyword{color:#66d9ef}.token.important,.token.regex{color:#fd971f}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style></head><body><div id="___gatsby"><div class="sc-bdVaJa gNqeEl" data-reactroot="" data-reactid="1" data-react-checksum="1318401923"><!-- react-empty: 2 --><div class="sc-bxivhb iZkCae" data-reactid="3"><!-- react-empty: 4 --><div class="sc-bwzfXH EPWvR" data-reactid="5"><a class="sc-htpNat eKRSxE" href="/blog" data-reactid="6">All</a><a class="sc-htpNat eKRSxE" href="/blog/tags" data-reactid="7">Tags</a></div><div data-reactid="8"><h1 data-reactid="9">什么是 Google V8</h1><div data-reactid="10"><h1>前言</h1>
+<p>由 C/C++ 入门的我突然转 JS (主要是 Node.js) 感觉整个人都是懵逼的（还不是懂得太少造的o-O），差别真的感觉好大，最神奇的是 JS 竟然不用经过编译就可以运行。
+期间总是能遇到 Google V8，不明觉厉，感觉有必要好好了解下，顺便好好梳理下基础知识。</p>
+<h1>静态编译与动态解释</h1>
+<p>众所周知，计算机只能理解机器语言，而我们平时编程用的通常是高级语言，所以源代码通常都要经过层层转换最终变成机器语言运行。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/1-f3b2d800f4a83e7b4546fd00ad7d8fc2-c15ab.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 680px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 43.97058823529412%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsSAAALEgHS3X78AAABS0lEQVQoz41R7U6DQBDk/d/GF9B/RhPTWFONKPJZCtfCFTi+ORhvLz1ME390k+M2w84ww1rLsqBtW4zjCKp5nvWhGobhCqdZKsK6rtPvDWZuiwY552iaZiVKKXUvhEBdC90TZj5EBvI8R1VVq5ARtQzZiE2TxCSVy785EGdUuFSglPOVyKT4pLE6pIaskxu6h75FLThEkSJLv3AI3lHmEdqmRF2dFHlC3/frPPHN0YL0KMsSURSpCAI8ixD+bHCMtgjsB2yf78CCFyR7G7H/imnsUBTFZb5ao5pj4Z9aLjHN76CYt5QWpGWEYYjz+azBTkUreYIi85H4G3j2EzizURUMhYo+jb1aVI0sy+D7vnaapumfQ8YYPM9DHMdqKQsKfkAc7HA6fGDvPOJ7d49T/IZj4oLtP9WGhRJg2oTruprrOM4a37opCnBz5F+K47maL83/pgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="汇编器与编译器概念图"
+        title=""
+        src="/static/1-f3b2d800f4a83e7b4546fd00ad7d8fc2-c15ab.png"
+        srcset="/static/1-f3b2d800f4a83e7b4546fd00ad7d8fc2-441fe.png 197w,
+/static/1-f3b2d800f4a83e7b4546fd00ad7d8fc2-f40a6.png 393w,
+/static/1-f3b2d800f4a83e7b4546fd00ad7d8fc2-c15ab.png 680w"
+        sizes="(max-width: 680px) 100vw, 680px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>早期只有汇编语言没有高级语言，不同的设备有一套自己的对应不同机器语言指令集的汇编语言，也就是说，汇编语言不能在不同系统平台之间移植。同一个软件为了让不同类型的设备都能用要写好几套代码，实在太不方便了，所以后来发展出了跨平台的高级语言。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/2-63c82b2afb6d7aaa6544daec47a3b450-3dca0.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 500px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 53.6%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAABiklEQVQoz5VS207CQBTs//+BX2HUEC8BjE9yewABxdLSUtrSbu8tV2k7HhYRVFA5yeQ0293Z2TMjpGmGLNshTVNsK89znFoC058wVuuwhg2YSp2+Gwh8hjTL14yc9BRiwVYfYfRL0F5LGPaKMKUy9JEEzRyT4vSDMNtD/qn+OzjhdBJgNg0w5wgxSbz1dljMwWq1OqjimOL1uhB5OkJXReRp1IcIHBXpagnH8/G2XCCgNc+W4Voy74tZxA/PZzFCOht4BnUDi/lko9CUHzDoFKB0ryG3C9B6N/TkPlrPPbQ6TYzle4jNS9xenGHQvoI56kJSdYgvFYylIlrVcxjiHXymbAhDd61MIWUK7z4b0O0JDMtGksQImEz/JHhWH74lIoloFJSMJPYQ+yNEvk4YccWcMA5dxKFNYLSZIfRtGkYG23HI6Wwzm+2M/nCYz5BplY2zYpmcLvInakMRqm5wlzlNvsNXZ3+6L1haE5Zao/zVYA6qlMUq4sg9Go392BzMIb94X/Y/4vFbvQM7dE0e/2P72wAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="高级语言未出现时"
+        title=""
+        src="/static/2-63c82b2afb6d7aaa6544daec47a3b450-3dca0.png"
+        srcset="/static/2-63c82b2afb6d7aaa6544daec47a3b450-07d85.png 197w,
+/static/2-63c82b2afb6d7aaa6544daec47a3b450-b3775.png 393w,
+/static/2-63c82b2afb6d7aaa6544daec47a3b450-3dca0.png 500w"
+        sizes="(max-width: 500px) 100vw, 500px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/3-303413cf27d6b664be4fb5328c9e264e-6e769.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 566px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 43.109540636042404%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsSAAALEgHS3X78AAABPElEQVQoz51S206DQBDl/7/DxD8wWo0PGvXFR7W2EqSUFkoXFhY0XBaOM0ugeEuMk5zM7E7O7JmZtUDWdR0G3zRND60P8R/REt/iIqYgQbetSfC5pfgb+H7M6U85TQIYFiY2XP5m4+M/5mC6suTeRRp7yJLNqIJNpSHiyIXYuZBiDd3UIzmL14iDJyS7hYGg+K1IiU8tB/Y5/OUFIvcG/naLMIrw4jjw7SvcXx/j9vII3vMMvu9gHyewXQ+efQd/cQZ3PoPzcIrXxxPkaUBiACsVK1K3NgrrujYz5LaV3JISD4py3EFVvhv1WrekeIUknENGS4N4qnA6BzNcwn+MHzMzPAy63/KwlK7rC1dVBSEEwjCElBJZlhFS45kz8IdNW9PNsa+//K2yLKGUQkYoigI5I8+hCNO/yjwu+gGT4bk82Kqu5QAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="高级语言出现后"
+        title=""
+        src="/static/3-303413cf27d6b664be4fb5328c9e264e-6e769.png"
+        srcset="/static/3-303413cf27d6b664be4fb5328c9e264e-5f1fe.png 197w,
+/static/3-303413cf27d6b664be4fb5328c9e264e-93c7e.png 393w,
+/static/3-303413cf27d6b664be4fb5328c9e264e-6e769.png 566w"
+        sizes="(max-width: 566px) 100vw, 566px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>随着计算机发展，编译器也越来越复杂，发展了很多分支，像是本地编译器、交叉编译器等，这里就不多说了。</p>
+<p>那么源码一定要经过编译才能运行吗？</p>
+<p><strong>解释器</strong>的出现给出了一种不用编译就能运行的能力，也就是我一开始说的让我很不习惯的地方。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/4-db454a55ac66c9a8d80d2e903fcba027-0a76b.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 31.857142857142858%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsSAAALEgHS3X78AAABCklEQVQY05VR2WrDMBD0//9PHktJKRRaQtsUeqUhTRQpcmLZkWTLji17qiMGv3Zh0O6wGmlnk2EYMAw9/Gn7Hp21sLZD113hchu4yI8YeX9vGsm06J3gf2Lsj5/ycIKmFCiOK6icwNQ1jDGQgiClXwHFaYOmaaBVDsE/HD6RsffA+34pHc/ekNGXwCVSbEF/5uC7Z5ylxElkYL8LLJ9meH2cga4foJTEMSU4rOfYr+5Avm/BtwuclQbne/DNveNvwMkSydSBqR/N5YLCPdA6H33uobVCWeoryjhRbSAyhlwcYNs6ejgKxSXY4E3btqCUYUcIeJqCMuYmUKicJWVVBSitQ23qi1to1PgDdBnNCzRltwYAAAAASUVORK5CYII='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="解释器"
+        title=""
+        src="/static/4-db454a55ac66c9a8d80d2e903fcba027-0a76b.png"
+        srcset="/static/4-db454a55ac66c9a8d80d2e903fcba027-56d76.png 197w,
+/static/4-db454a55ac66c9a8d80d2e903fcba027-24e50.png 393w,
+/static/4-db454a55ac66c9a8d80d2e903fcba027-0a76b.png 700w"
+        sizes="(max-width: 700px) 100vw, 700px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>前面说的都算是先静态编译到可执行的文件，然后运行可执行的文件来执行程序，而解释器提供了一种边编译边运行的动态运行方法，而也正因为通过解释器运行的代码是边编译边运行的，所以运行的速度比静态编译的那种慢很多。</p>
+<p>所以程序运行的方式分为<strong>静态编译</strong>和<strong>动态解释</strong>。</p>
+<p>我从 C/C++ 跨到 JS 里，就是从静态编译跨到了动态解释里。</p>
+<h1>即时编译与虚拟机</h1>
+<p>这小节的概念了解 Java 的人应该很了解，虽然我之前接触过一点 Java 但是直到现在才算是摸清了点真面目，当然学习的过程我也没对 Java 做过多深入，毕竟主旨是 Google V8 呀！</p>
+<p><strong>即时编译</strong>（Just-in-time compilation）混合了编译器和解释器，在边编译边运行的过程中会将编译过的代码缓存起来，下次运行的时候运行的就是编译后的代码。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/5-f6aab7265b5859b112485bcf43d1fe00-0a76b.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 35.857142857142854%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAABFUlEQVQoz4VR2W6DMBDk/z+qUg+lL31pq7RVRAMIGkGwwfjiNNN1QhL1IelKI+85HnsD3LB5ngl0YsES/6mffIJzDoHVHJJHMIrDGgXBIlRFiNY26PoRWlWQVYKGJ7DWQEsGTnXBErRdByVLiHJLPRnGcUQgWIwsfALbR2AsRxo+Y/v5AFHtIJRBWSTIvleHfF0zsCJC9PWIXfwC0QiUeUjzKxTpG6aJCJ2boYy59XJSMqIbJvxn0zQR4exQC3GQ3/X9EYuvtEZT/SBLPpDFaxi5P//dVULv2LY9DGtSeoKxFryukaevCNf32LzfgeebM6FfgKE+S31ewDAMR8Jrt102efEdBX7Ikw20AKkUFEGTGE/s879n7B2MWs6vQQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="即时编译示意图"
+        title=""
+        src="/static/5-f6aab7265b5859b112485bcf43d1fe00-0a76b.png"
+        srcset="/static/5-f6aab7265b5859b112485bcf43d1fe00-56d76.png 197w,
+/static/5-f6aab7265b5859b112485bcf43d1fe00-24e50.png 393w,
+/static/5-f6aab7265b5859b112485bcf43d1fe00-0a76b.png 700w"
+        sizes="(max-width: 700px) 100vw, 700px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>当然，虽然即时编译在运行过一次以后有了编译后的代码，再次运行时因为识别编译过的和未编译过的（即修改）代码，速度还是比静态编译的程序运行的慢。</p>
+<p>避免二次编译也使得理论上即时编译的总体开销（编译和运行）优于静态编译和动态解释。</p>
+<p>这里还出现了一个<strong>字节码</strong>的概念。</p>
+<p>字节码的出现理由有点像<strong>交叉编译器</strong>（在 A 系统平台下可以产生 B 系统平台的可执行文件的编译器），在源码不能或很难编译成目标平台可执行文件时非常好用。感觉也有点像是跨平台的汇编语言，复杂度介于高级语言和低级语言之间。</p>
+<p>在即时编译里出现的字节码是一种动态字节码转译方式，字节码也可以静态转译的，就是先编译成字节码再运行的。</p>
+<p>字节码通常运行在一个程序<strong>虚拟机</strong>上。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/6-e725f6630e8fb14f65dfb9a6cd9a9a5b-0a76b.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 72.14285714285715%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsSAAALEgHS3X78AAACWklEQVQ4y31TW2vUQBTef+L/UfBv+NBX/4KKKGLBBxGKb1pU6AqFrrW0aL3UYleqXXuhe3GvSZpNssnM5DbJ55kkm2yLeODkcs7MN9/5zpkaCjNMG87MRRxH8xCEEOj8XsXgfAthGuHg2xp2PrwHj2wgSXDj8W2s7W1na2UikaYpap7n4nvzEPdXv+DJiwZcxy4BHWuEg8Z17O0sZ//tbgsr9XVcWAbCKMTNO0tYXwBUVlOP3f1DLD2q497zDTo4T9BhmDkW2uctTKd2Fph6PpqnbTgeRxAEmPR68BwHUs73pDngUdfAw9VPePp2H9wPc3oEGEcxnQxEUZQHSs/lmJFErusV+QIwIS2Uff3Zxo/jXlnuSJug26/+HZejpTlwGUNSMHKEgUCKEqwsWRIocx1w0lMZD31s1zdQX3mJoT7OYvWtJq7d3cRyYxcRy9cZkxN400kJWJasPiTVVmpB/vndR2y92oTFdbBgAs1wsHv8B6YvMWM6TLuL4Ncp/KMTSFGxrM2pzk2Bpogx7Bk4aw1pkUQUxqRnCEFVWKZJoxVn69iFCabpSBY1LJHSSgfOJMIghIwlOBfggmVx3w+ycVEWU25q25knxb5LgGmaN0c3+3j2+has2RgitOGJMXVeh+WNiBUxJWnmjUzpnfn/AMdaB28aD9DqdaDRAJ+OBzgaKEAdzbM+9lr9crQWgS41pQKt9DzuXRBLAYv5MGZM3TSaN5KC9CoZFiCLVrsKppgq55yTM/iCZ+66LpjngdEcLjJTpgZb5dWw/5Ph1VOvWp6u2KmOq6uogP8CWxsq0aOLzukAAAAASUVORK5CYII='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="字节码与虚拟机"
+        title=""
+        src="/static/6-e725f6630e8fb14f65dfb9a6cd9a9a5b-0a76b.png"
+        srcset="/static/6-e725f6630e8fb14f65dfb9a6cd9a9a5b-56d76.png 197w,
+/static/6-e725f6630e8fb14f65dfb9a6cd9a9a5b-24e50.png 393w,
+/static/6-e725f6630e8fb14f65dfb9a6cd9a9a5b-0a76b.png 700w"
+        sizes="(max-width: 700px) 100vw, 700px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>图里的虚拟机部分也算是一个解释执行的过程。</p>
+<p>广义的虚拟机包括一切跟任何真实机器无关的虚拟架构。
+而当前虚拟机的实现主要分成三类：</p>
+<ul>
+<li>
+<p><strong>系统虚拟机</strong>：虚拟了一个运行完整系统的操作平台。典型代表：VirtualBox。</p>
+</li>
+<li>
+<p><strong>程序虚拟机</strong>：为单个计算机程序的运行虚拟必要的环境。典型代表：Java 虚拟机。</p>
+</li>
+<li>
+<p><strong>操作系统层虚拟化</strong>：介于系统和单个程序之间，可以运行多个独立应用程序，但是又不用虚拟完整操作系统。典型代表：Docker。</p>
+</li>
+</ul>
+<h1>Google V8</h1>
+<p>终于来到了 Google V8！</p>
+<blockquote>
+<p><strong>V8</strong> 是 Google 开发的开源的 JavaScript 引擎，用于 Google Chrome 及 Chromium 中。</p>
+</blockquote>
+<blockquote>
+<p><strong>JavaScript 引擎</strong>是一个专门处理 JavaScript 脚本的虚拟机，一般会附带在网页浏览器之中。</p>
+</blockquote>
+<p>V8 是用 C++ 写的，使用了即时编译技术，工作模式如下图：
+
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/7-dd1945631d2519b9b24166ffad948b41-42aa8.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 436px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 41.055045871559635%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsSAAALEgHS3X78AAABMElEQVQoz51S2W7CMBDk/78IiQdQKX1Ii6BIVAmhFAo57VwkIYlzTDeOgnrASy2N1/bujke7OwCtpmnwczXXt+++v3G/ssg/6IOEEIgjjiQO0ee1vlvI8wtEkaEsc2m7ey5zBu2WZyk8Y4HEfUZkKfCd7V0VVVWCHefYvY2hLkf43Exh7R7BzLUUIgl9R4e5ncD+eCLMYGwf4Psu0kuGJE0IqURMsGwLzkHBXp1Aex3hpE/h7GdwjivUPWHgaNBXQ6znQxl0UMcwjD2Y58PljMDp7MF2GdSNCp/bpLRAKTIUxYWQgbsm6rruCM8hQ2gqEMECufcCbizJebsBVVkgCjmpaYhQUB0FxVbyk9Zem9KSckuDZ79TkbM7TelqGAVckvYIA4b4HHRNae6Mw3/H5gsr+GioV5jVfgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="V8 工作模式图-来自[1]"
+        title=""
+        src="/static/7-dd1945631d2519b9b24166ffad948b41-42aa8.png"
+        srcset="/static/7-dd1945631d2519b9b24166ffad948b41-b9f8d.png 197w,
+/static/7-dd1945631d2519b9b24166ffad948b41-e754c.png 393w,
+/static/7-dd1945631d2519b9b24166ffad948b41-42aa8.png 436w"
+        sizes="(max-width: 436px) 100vw, 436px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>感觉到这里已经足够说明什么是 Google V8 了，后面算是拓展阅读吧。</p>
+<h3>V8 的隐藏类（Hidden Class）</h3>
+<p>JavaScript 作为一种动态编程语言，对象上的属性（Property）可以随时增减。如果用字典类的数据结构来存储这些对象属性，访问的时候就会带来动态查找的损耗，这也是 JavaScript 比类似 Java 这种类型确定的语言慢的原因之一。</p>
+<p>V8 用动态创建隐藏类的方式来减少这种损耗。</p>
+<p>举个例子。</p>
+<p>有如下简单的一段 JS 代码：</p>
+<div class="gatsby-highlight">
+      <pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">Point</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">=</span> x<span class="token punctuation">;</span> <span class="token comment">// E1</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">=</span> y<span class="token punctuation">;</span> <span class="token comment">// E2</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Point</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//  E0</span>
+</code></pre>
+      </div>
+<p>语句按 E0、E1、E2 的顺序执行。</p>
+<p>执行 E0 的时候，创建一个隐藏类 C0，对象的类指示器指向 C0。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/8-3ba61291a82cff51302228ff51a15346-8b302.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 426px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 62.676056338028175%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsSAAALEgHS3X78AAAB/ElEQVQ4y4WTaXPaMBCG+f8/pd+att+YSafTDBMoNw3hMBhblm8b4QMfmDeSTB3C0MnOrFeyvY/2UgtcqgrI8wzlqRJbnM/nxl6vawucqrO0wq/ia7mvv6KVHRM4ZApP78HRh4gOPupDqgb4rkDo6XCNKczdBLbwo3+5/wQstKVfS8BSt4diP0UeDOBoXZRlif9JYM1hrdvo/vqCl/4DyKINT32Ebys10N49Y9L9gT9PXzHofIO2+InNdgliWtANAzqlUg3TxHA2w2o5BvNV7L1amb+DY7zCd8glQn0AZj6DWX0crB5stYMoYryeJxRF8a486iRN4Ht1ap4fglIb7JDwjE5ge68GRsyHy+sXOwMERheBq12SO99N2Xcp9qHLwRZc28A+cODxd6F/qaF45FnGi+oiTWJ8JhWP/FQWiOMI/fGIN4pnwidENFEC/41DE4GjwtJGMLYjkO1QdlM0ztJn/OBj858ogajttQhWq5m3ywkeneFgPvEOfses9wDttY1A/42AdJDErHHOixwab9rtvLau6UKovoS66kPbjGGRFzh0AZfrat6FslnXXecgRVWhEfI50DIJd1SxWm+lDQIG1wuhKGsc0/jDv7fru0DH0kGNnQSvlnMo6wUMwvd0B3GrriO6vZZ3gSWvzTGNZDR5lkrNjrGE3QPcyhuQveJ7h0xKMwAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="E0 阶段"
+        title=""
+        src="/static/8-3ba61291a82cff51302228ff51a15346-8b302.png"
+        srcset="/static/8-3ba61291a82cff51302228ff51a15346-7c7da.png 197w,
+/static/8-3ba61291a82cff51302228ff51a15346-4c801.png 393w,
+/static/8-3ba61291a82cff51302228ff51a15346-8b302.png 426w"
+        sizes="(max-width: 426px) 100vw, 426px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>执行 E1 的时候，在 C0 基础上新建一个隐藏类 C1（C1 知道 x 属性存的位置），并给 C0 增加一个转换指示：如果增加一个 x 属性，就变成 C1。</p>
+<p>
+  <a
+    class="gatsby-resp-image-link"
+    href="/static/9-6e6628d1689c9913d336f32a4b5f7c72-ac902.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+  
+  <span
+    class="gatsby-resp-image-wrapper"
+    style="position: relative; display: block; ; max-width: 558px; margin-left: auto; margin-right: auto;"
+  >
+    <span
+      class="gatsby-resp-image-background-image"
+      style="padding-bottom: 79.39068100358423%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsSAAALEgHS3X78AAACBklEQVQ4y41TaY+bMBDl//+efmgrVT2yUtW0Uo/d7bJJCae5A5gjAQfyOnY22YQuakZ68tjA482bsQaK/R7ouhZ93+Ow31+Fvh/UOgzPuSbJeGqiir6DR3cQ3QbXRL/rELs/YDzcwFvNETlfUZcJtO2Gg/35CFv/AEd/h8j7jXrTom5qQjOBDRhzEVpzmPoMvvmF8s/gGYPWbisEqxv4xiew5XuE3gOKskLOCwJ/QnFAUZzOme9BCKHIs6wgywSapoQm5Ve5jzK+BU8W5IW4qmTRbVEWa3iuDcc2wSmvyvxAqDwhY/dP+cl45ZVAFhuIfV2pz6IlitRWTRSELEvheg560ZHiTjbl8PE50TE/KgnIjuWv11j8fIPYmiF25vSjnXreUdlplp2Ua1NkJ0LRouQpurZBmoTYNBWKPEEQBspTFgQnQjU2Ux49E3ao6xItmV5VFc0cUFeccq7UbVuaX3l4TjhWdq5QemhbK5imiSSOybOc9sY/zTu+r40PxjHQ7QmYhShk0PV76qqFOPSw24kXrbpQ2FRrFGuPwFDmAcG/uDm2572o6jwuCNfBLVz9Le6/vVK3Zu3MUGS+Gp9h6BFSyeMpGJNeEAbMhLG4A3MN8DyCay9gkV8JdVGSxWk6OV4ThA7MlYHHR12t8gbI6f9fmZOEsqMK1MEdjYvMZanjzp/n4/gLm8TWw8yhSsIAAAAASUVORK5CYII='); background-size: cover; display: block;"
+    >
+      <img
+        class="gatsby-resp-image-image"
+        style="width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px #ffffff;"
+        alt="E1 阶段"
+        title=""
+        src="/static/9-6e6628d1689c9913d336f32a4b5f7c72-ac902.png"
+        srcset="/static/9-6e6628d1689c9913d336f32a4b5f7c72-35a8d.png 197w,
+/static/9-6e6628d1689c9913d336f32a4b5f7c72-01661.png 393w,
+/static/9-6e6628d1689c9913d336f32a4b5f7c72-ac902.png 558w"
+        sizes="(max-width: 558px) 100vw, 558px"
+      />
+    </span>
+  </span>
+  
+  </a>
+    </p>
+<p>执行 E2 的时候，在 C1 基础上新建一个隐藏类 C2（C2 知道 x 和 y 属性存位置），并给 C1 增加一个转换指示：如果增加一个 y 属性，就变成 C2。</p>
+<p><img src="10.png" alt="E2 阶段"></p>
+<p>隐藏类的创建过程就是隐藏类树的创建过程，在之后遇到新建对象实例，就会先试图从已创建的树里找到对应的类，没找到的话才会新建对应的树节点。</p>
+<p>这之后，每个对象的类指示器都指向对应的隐藏类，和 Java 里的类与对象关系差不多，JavaScript 在访问属性的时候就避免了相对漫长的查找，从而加快了速度。</p>
+<p>从这里也可以得出一个优化代码的方式：尽量用相同的顺序实例化对象属性以最大化复用隐藏类树。</p>
+<h3>GC（垃圾回收）</h3>
+<p>V8 将内存分成：</p>
+<ul>
+<li><strong>new-space</strong>：对象刚创建的时候分配这里的内存给对象。内存小，GC 删除的一般是这里的数据。</li>
+<li><strong>old-data-space</strong>：new-space 里的一些对象经过一轮 GC 没被删除，并且这些对象内部不包含指针（纯数据），就会被移到这里。</li>
+<li><strong>old-pointer-space</strong>：new-space 里的一些对象经过一轮 GC 没被删除，并且这些对象内部包含指针（指向别的对象），就会被移到这里。</li>
+<li><strong>large-object-space</strong>：大小超过别的 space 大小限制的对象会被放在这里，它们有专门非配的内存，不归 GC 管。</li>
+<li><strong>code-space</strong>：代码对象（包含即时编译后的指令）存放的地方。会被执行的代码不是放在这里就是放在 large-object-space 里。</li>
+<li><strong>cell-space，property-cell-space，map-space</strong>：分别存放对应名字（cells、propertyCells、maps）的地方（这里我也不太懂这啥）。</li>
+</ul>
+<p>GC 首先做的是分清数据对象和指针，因为跟踪指针才能知道哪些对象是不能被回收的。</p>
+<p>V8 的 GC 有以下几个特点：</p>
+<ul>
+<li>运行 GC 的时候停止执行程序。</li>
+<li>绝大多数的 GC 只处理部分数据对象内存垃圾以最小化对应用程序的影响。</li>
+<li>总是正确地知道所有的对象和指针的存储位置。这避免了将对象误认为指针导致的内存泄漏。</li>
+</ul>
+<p>GC 我也没多看，也说不出个所以然来了，更多可以看<a href="http://www.jayconrod.com/posts/55/a-tour-of-v8-garbage-collection">A tour of V8: Garbage Collection</a>。</p>
+<p><strong>参考</strong>：</p>
+<p><a href="https://medium.com/reloading/javascript-start-up-performance-69200f43b201">图[1]来源</a></p>
+<p>维基百科上的各种词条</p>
+<p><a href="https://github.com/v8/v8/wiki/Design-Elements">Design Elements</a></p>
+<p><a href="http://www.jayconrod.com/posts/55/a-tour-of-v8-garbage-collection">A tour of V8: Garbage Collection</a></p></div><em data-reactid="11"><!-- react-text: 12 -->标签：<!-- /react-text --><span data-reactid="13"><a href="/blog/tags/js/" data-reactid="14">js</a></span></em><p data-reactid="15">2018-03-19</p></div></div></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-a3030df141a9153ac7e9.js","107818501498521":"component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","77653406118394":"component---src-templates-tag-page-js-c5f013927e89fb752651.js","162898551421021":"component---src-pages-404-js-e6c65978b6fa79ced234.js","152176518627018":"component---src-pages-blog-index-js-f37a3e89116e6c3ef634.js","121586416807847":"component---src-pages-blog-tags-js-3d074e28091772844f50.js","35783957827783":"component---src-pages-index-js-adfaba1e0f468f50acdb.js","60335399758886":"path----557518bd178906f8d58a.js","40375810615591":"path---blog-2016-12-23-img-srcset-sizes-picture-3d88680e63edf1622620.js","196993793981773":"path---blog-2017-02-06-config-eslint-with-file-c1fec9d6646c6d611c64.js","159968386082061":"path---blog-2017-08-06-config-nginx-server-handbook-ff025f0718c08235eec6.js","59090691286662":"path---blog-2017-08-18-node-js-event-loop-979c7b1373965dc8f92d.js","185853751476360":"path---blog-2017-08-18-nodejs-cli-5d6411e9b791c2b083bd.js","210764608676883":"path---blog-2018-03-19-what-is-google-v-8-2dcbd1c1fa17266fab71.js","35922930818165":"path---blog-tags-html-8ab0ef81c3afb65dd9d9.js","136741174138696":"path---blog-tags-es-lint-d4b9a5fa8f1f2d7bb669.js","40059224460927":"path---blog-tags-js-be777571d32ea43f2964.js","199662278216656":"path---blog-tags-nginx-616f7bfa347158df179b.js","197307841559478":"path---blog-tags-visual-box-07a28d4e9577f201807c.js","82163053159536":"path---blog-tags-node-js-42cf20a77a32f8482dba.js","254022195166212":"path---404-a0e39f21c11f6a62c5ab.js","49683490770531":"path---blog-0f3b6cdf314906f2d4c7.js","186779927453684":"path---blog-tags-0e3f58dd753dea443c75.js","142629428675168":"path---index-7019934553236f36cced.js","178698757827068":"path---404-html-a0e39f21c11f6a62c5ab.js","114276838955818":"component---src-layouts-index-js-bbab089550a358b83ffa.js"}/*]]>*/</script><script>/*<![CDATA[*/!function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",["/commons-a6e237db30813b24a7cc.js","/app-a3030df141a9153ac7e9.js","/path---blog-2018-03-19-what-is-google-v-8-2dcbd1c1fa17266fab71.js","/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","/component---src-layouts-index-js-bbab089550a358b83ffa.js"])/*]]>*/</script></body></html>

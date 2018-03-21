@@ -1,0 +1,125 @@
+<!DOCTYPE html><html><head><link rel="preload" href="/component---src-layouts-index-js-bbab089550a358b83ffa.js" as="script"/><link rel="preload" href="/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js" as="script"/><link rel="preload" href="/path---blog-2016-12-23-img-srcset-sizes-picture-3d88680e63edf1622620.js" as="script"/><link rel="preload" href="/app-a3030df141a9153ac7e9.js" as="script"/><link rel="preload" href="/commons-a6e237db30813b24a7cc.js" as="script"/><style data-styled-components="gNqeEl iZkCae EPWvR eKRSxE">
+/* sc-component-id: sc-bdVaJa */
+.gNqeEl{margin:0;padding:0;border:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.gNqeEl{width:700px;}} @media (max-width:500px){.gNqeEl{width:500px;}}
+/* sc-component-id: sc-bwzfXH */
+.EPWvR{position:fixed;z-index:2;top:0;left:0;}
+/* sc-component-id: sc-htpNat */
+.eKRSxE{display:block;width:3rem;margin:0.5rem;pading:1rem;background:#000;text-align:center;color:#fff;}
+/* sc-component-id: sc-bxivhb */
+.iZkCae{margin:0;display:-webkit-flex;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;margin-left:auto;margin-right:auto;} @media (min-width:700px){.iZkCae{width:700px;}} @media (max-width:500px){.iZkCae{width:500px;}}</style><title data-react-helmet="true">cxswow | img 的 srcset、sizes 属性和 picture 元素</title><meta data-react-helmet="true" name="description"/><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="icon" type="image/png" sizes="64x64" href="/static/logo.05897cef.png"/><style id="gatsby-inlined-css">p,ul{line-height:1.8}a{color:blue;text-decoration:none}code{background:#eee}code,code[class*=language-],pre[class*=language-]{font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace}code[class*=language-],pre[class*=language-]{color:#f8f8f2;background:none;text-shadow:0 1px rgba(0,0,0,.3);text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#272822}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#f8f8f2}.namespace{opacity:.7}.token.constant,.token.deleted,.token.property,.token.symbol,.token.tag{color:#f92672}.token.boolean,.token.number{color:#ae81ff}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#a6e22e}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f8f8f2}.token.atrule,.token.attr-value,.token.function{color:#e6db74}.token.keyword{color:#66d9ef}.token.important,.token.regex{color:#fd971f}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style></head><body><div id="___gatsby"><div class="sc-bdVaJa gNqeEl" data-reactroot="" data-reactid="1" data-react-checksum="-544569563"><!-- react-empty: 2 --><div class="sc-bxivhb iZkCae" data-reactid="3"><!-- react-empty: 4 --><div class="sc-bwzfXH EPWvR" data-reactid="5"><a class="sc-htpNat eKRSxE" href="/blog" data-reactid="6">All</a><a class="sc-htpNat eKRSxE" href="/blog/tags" data-reactid="7">Tags</a></div><div data-reactid="8"><h1 data-reactid="9">img 的 srcset、sizes 属性和 picture 元素</h1><div data-reactid="10"><p>HTML 5.1 新增加了 <code class="language-text">img</code> 元素的 <code class="language-text">srcset</code> 、 <code class="language-text">sizes</code> 属性和 <code class="language-text">picture</code> 元素，使得响应式图片的实现更为简单便捷，很多主流浏览器的新版本也对这些新增加的内容支持良好。
+下面通过一些例子来简要说下用法，例子里用 <a href="http://placehold.it/">PLACEHOLD.IT</a> 来获取不同像素的图片。</p>
+<h1>srcset 和 sizes 属性</h1>
+<p> <code class="language-text">srcset</code> 是一个包含一个或多个源图的源图容器，不同源图用逗号分隔，每一个源图由下面两部分组成：
+1、图片 URL
+2、 <code class="language-text">x</code> （像素比描述）或  <code class="language-text">w</code> （图片像素宽度描述）描述符（与图片 URL 相隔一个空格）， <code class="language-text">w</code> 描述符的加载策略是通过 <code class="language-text">sizes</code> 属性里的声明来计算选择的</p>
+<p>上述第2点如果没有给出，则是默认的 <code class="language-text">1x</code> 。
+以下情况是不正确的：</p>
+<ul>
+<li>在同一个 <code class="language-text">srcset</code> 里的不同图片出现有的用 <code class="language-text">x</code> 描述符有的用 <code class="language-text">w</code> 描述符</li>
+<li>同一个图片既使用了 <code class="language-text">x</code> 描述符也使用了 <code class="language-text">w</code> 描述符</li>
+</ul>
+<p>对于不正确的情况，不同的浏览器使用不同的处理方法。</p>
+<p> <code class="language-text">sizes</code> 写法与 <code class="language-text">srcset</code> 差不多，也是用逗号分隔的一个或多个 <code class="language-text">string</code> ，每个 <code class="language-text">string</code> 由下面两部分组成：
+1、媒体查询。最后一个 <code class="language-text">string</code> 不能有这个，作为 <code class="language-text">fallback</code>
+2、图片 <code class="language-text">size</code> （大小）信息。需要注意的是这里不能使用 <code class="language-text">%</code> 来描述图片大小，如果要用百分比来表示，要使用类似于 <code class="language-text">vm</code> （100vm = 100%设备宽度）这样的单位来描述，其它的像是 <code class="language-text">px</code> 、 <code class="language-text">em</code> 等可以正常使用。</p>
+<p> <code class="language-text">sizes</code> 里给出的不同媒体查询选择图片大小的建议只对 <code class="language-text">w</code> 描述符起作用，也就是说，如果 <code class="language-text">srcset</code> 里用的是 <code class="language-text">x</code> 描述符或根本没有定义 <code class="language-text">srcset</code> ，这个 <code class="language-text">sizes</code> 是没有意义的。</p>
+<h3>x 描述符</h3>
+<div class="gatsby-highlight">
+      <pre class="language-html"><code class="language-html">&lt;img
+    srcset=“
+        http://placehold.it/2500 5x,
+        http://placehold.it/1500 3x,
+        http://placehold.it/1000 2x,
+        http://placehold.it/500 1x
+    "
+    src="http://placehold.it/500/abc"
+/>
+</code></pre>
+      </div>
+<p>上面代码的意思就是：5像素比（现在很多安卓手机比如小米、华为的所谓高清2k屏就是5像素比以上的）的设备使用2500x2500像素的图片，3像素比的设备使用1500x1500像素的图片，2像素比的设备使用1000x1000像素的图片，1像素比（普通的笔记本电脑显示屏就是1像素比的）的设备使用500x500像素比的图片。
+对于不支持 <code class="language-text">srcset</code> 的浏览器，显示 <code class="language-text">src</code> 的图片（这个图片是500x500像素、RGB 颜色 <code class="language-text">abc</code> 的）。
+而对于 <code class="language-text">srcset</code> 里没有给出像素比的设备，不同浏览器的选择策略不同。比如例子中没有给出1.5像素比的设备要使用哪张图，浏览器可以选择2像素比的也可以选择1像素比的（当然也可以选择5像素比或者使用 <code class="language-text">src</code> 的图片，但是这显然不是一个好的选择）。</p>
+<h3>w 描述符和 sizes</h3>
+<p><code class="language-text">w</code> 描述符可以简单理解为描述源图的像素大小（无关宽度还是高度，大部分情况下可以理解为宽度）。</p>
+<div class="gatsby-highlight">
+      <pre class="language-html"><code class="language-html">&lt;img
+    srcset=“
+        http://placehold.it/2000 2000w,
+        http://placehold.it/1500 1500w,
+        http://placehold.it/1000 1000w,
+        http://placehold.it/500 500w
+    "
+    sizes=“
+        (max-width: 500px) 500px,
+        (max-width: 1000px) 1000px,
+        (max-width: 1500px) 1500px,
+        2000px
+    "
+    src="http://placehold.it/500/abc"
+/>
+</code></pre>
+      </div>
+<p>上述例子的意思是：对于 viewport 在 <code class="language-text">500px</code> 及以下的使用 <code class="language-text">500w</code> 的图片，以此类推，最后一个是前面的媒体查询都不符合的情况下使用 <code class="language-text">2000w</code> 的图片。
+这里如果没有相对应的 <code class="language-text">w</code> 描述，一般选择第一个大于它的。如上述例子中如果有一个媒体查询是 <code class="language-text">700px</code> 的，一般加载 <code class="language-text">1000w</code> 对应的源图。（这里之所以用“一般”这个词，是因为文档里没有规定是这样的，而根据参考和我的尝试——mac Safari 10.0.1、windows Chrome 55.0、android Chrome 55.0、windows Firefox 50.1选择加载第一个大于它的，Microsoft Edge 38选择加载的是 <code class="language-text">500w</code> ，可能是第一个小于它的也可能是最接近的——我认为一般是选择加载第一个大于它的。）
+下面说一个使用百分比的例子：</p>
+<div class="gatsby-highlight">
+      <pre class="language-html"><code class="language-html">&lt;img
+    srcset=“
+        http://placehold.it/2000 2000w,
+        http://placehold.it/1500 1500w,
+        http://placehold.it/1000 1000w,
+        http://placehold.it/500 500w
+    "
+    sizes=“
+        (max-width: 500px) 100vm,
+        (max-width: 1000px) 80vm,
+        (max-width: 1500px) 50vm,
+        2000px
+    "
+    src="http://placehold.it/500/abc"
+/>
+</code></pre>
+      </div>
+<p>这里图片的选择就是： viewport 宽度乘以1或0.8或0.5得到的像素来选择不同的 <code class="language-text">w</code> 。比如 viewport 为 800px ，对应 <code class="language-text">size</code> 80vm ，就是 800*0.8=640 像素，应该加载一个 <code class="language-text">640w</code> 的源图，但是没有找到 <code class="language-text">640w</code> ，这时候一般选择第一个大于 <code class="language-text">640w</code> 的，也就是 <code class="language-text">1000w</code> 。</p>
+<p>对于没有给出 <code class="language-text">sizes</code> 的，一般是按照 100vm 来选择加载图片。当然这里也是没有规定的、看浏览器的选择的。</p>
+<h1>picture 元素</h1>
+<p> <code class="language-text">picture</code> 元素内部的 <code class="language-text">source</code> 与 <code class="language-text">img</code> 的关系像是相片与相框的关系，相框带有一个底图，我很有多不同尺寸（风格）相片，我试图找到第一个合适尺寸（合适风格）的相片放到相框里，如果没有找到就不放相片而用相框本身的底图，当然如果没有相框那就不能挂到墙上去，而 <code class="language-text">picture</code> 告诉你这个相框只能在这些图片里找合适的。
+<code class="language-text">picture</code> 支持尺寸（媒体查询）和格式选择。
+下面是尺寸选择的例子：</p>
+<div class="gatsby-highlight">
+      <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>picture</span><span class="token punctuation">></span></span>
+    &lt;source media="(max-width: 500px)" srcset="http://placehold.it/500” />
+    &lt;source media="(max-width: 1000px)" srcset="http://placehold.it/1000” />
+    &lt;source media="(max-width: 1500px)" srcset="http://placehold.it/1500” />
+    &lt;img src="http://placehold.it/500/abc” />
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>picture</span><span class="token punctuation">></span></span>
+</code></pre>
+      </div>
+<p>每个 <code class="language-text">source</code> 是一个选择，媒体查询对应 <code class="language-text">media</code> ，浏览器找到一个适用的就使用对应的 <code class="language-text">srcset</code> 里给出的图片，对于不支持 <code class="language-text">picture</code> 元素的浏览器可以正确的加载 <code class="language-text">img</code> 。显然，各种 <code class="language-text">img</code> 的属性、样式什么的也都应该写在 <code class="language-text">img</code> 里面。
+下面是格式选择的例子：</p>
+<div class="gatsby-highlight">
+      <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>picture</span><span class="token punctuation">></span></span>
+   &lt;source type="image/vnd.ms-photo" srcset="http://placehold.it/500” />
+   &lt;source type="image/jp2" srcset="http://placehold.it/1000” />
+   &lt;source type="image/webp" srcset="http://placehold.it/1500” />
+   &lt;img src="http://placehold.it/500/abc” />
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>picture</span><span class="token punctuation">></span></span>
+</code></pre>
+      </div>
+<p> <code class="language-text">vnd.ms-photo</code> 、<code class="language-text">jp2</code> 、 <code class="language-text">webp</code> 等是一些新的图片格式，不像 <code class="language-text">png</code> 、 <code class="language-text">jpg</code> 等格式获得广泛支持，但它们又有很多优点，这时候要使用的话就要进行格式支持性判断，浏览器也是选择第一个支持的格式加载对应的 <code class="language-text">srcset</code> 里给的图片，当然对 <code class="language-text">type</code> 判断以后不管你给的是什么格式的图片都选择加载它，如果给了不符合的另外一个格式的图片也不能再加载后面可能支持的格式了。</p>
+<p>对于 <code class="language-text">picture</code> 有有一点要注意的是， <code class="language-text">img</code> 的位置会影响最终加载结果。
+像下面这样写：</p>
+<div class="gatsby-highlight">
+      <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>picture</span><span class="token punctuation">></span></span>
+    &lt;img src="http://placehold.it/500/abc” />
+    &lt;source media="(max-width: 500px)" srcset="http://placehold.it/500” />
+    &lt;source media="(max-width: 1000px)" srcset="http://placehold.it/1000” />
+    &lt;source media="(max-width: 1500px)" srcset="http://placehold.it/1500” />
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>picture</span><span class="token punctuation">></span></span>
+</code></pre>
+      </div>
+<p>上面这个例子在我之前提到的浏览器里，我发现它们始终选择加载 <code class="language-text">img</code> 里的 <code class="language-text">src</code> 图片，即使 <code class="language-text">src</code> 的图片不能用。也就是说，相框里的底图和相片的地位同等。
+<code class="language-text">picture</code> 元素也是向后兼容的，不支持该元素的浏览器相当于只看到了 <code class="language-text">img</code> 。</p>
+<p><strong>参考</strong>：</p>
+<p> HTML 文档（这个我是在  <a href="https://kapeli.com/dash">Dash for macOS</a> 里看的）</p>
+<p> <a href="https://isux.tencent.com/responsive-image.html">[ISUX译]响应式图像</a></p></div><em data-reactid="11"><!-- react-text: 12 -->标签：<!-- /react-text --><span data-reactid="13"><a href="/blog/tags/html/" data-reactid="14">HTML</a></span></em><p data-reactid="15">2016-12-23</p></div></div></div></div><script id="webpack-manifest">/*<![CDATA[*/window.webpackManifest={"231608221292675":"app-a3030df141a9153ac7e9.js","107818501498521":"component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","77653406118394":"component---src-templates-tag-page-js-c5f013927e89fb752651.js","162898551421021":"component---src-pages-404-js-e6c65978b6fa79ced234.js","152176518627018":"component---src-pages-blog-index-js-f37a3e89116e6c3ef634.js","121586416807847":"component---src-pages-blog-tags-js-3d074e28091772844f50.js","35783957827783":"component---src-pages-index-js-adfaba1e0f468f50acdb.js","60335399758886":"path----557518bd178906f8d58a.js","40375810615591":"path---blog-2016-12-23-img-srcset-sizes-picture-3d88680e63edf1622620.js","196993793981773":"path---blog-2017-02-06-config-eslint-with-file-c1fec9d6646c6d611c64.js","159968386082061":"path---blog-2017-08-06-config-nginx-server-handbook-ff025f0718c08235eec6.js","59090691286662":"path---blog-2017-08-18-node-js-event-loop-979c7b1373965dc8f92d.js","185853751476360":"path---blog-2017-08-18-nodejs-cli-5d6411e9b791c2b083bd.js","210764608676883":"path---blog-2018-03-19-what-is-google-v-8-2dcbd1c1fa17266fab71.js","35922930818165":"path---blog-tags-html-8ab0ef81c3afb65dd9d9.js","136741174138696":"path---blog-tags-es-lint-d4b9a5fa8f1f2d7bb669.js","40059224460927":"path---blog-tags-js-be777571d32ea43f2964.js","199662278216656":"path---blog-tags-nginx-616f7bfa347158df179b.js","197307841559478":"path---blog-tags-visual-box-07a28d4e9577f201807c.js","82163053159536":"path---blog-tags-node-js-42cf20a77a32f8482dba.js","254022195166212":"path---404-a0e39f21c11f6a62c5ab.js","49683490770531":"path---blog-0f3b6cdf314906f2d4c7.js","186779927453684":"path---blog-tags-0e3f58dd753dea443c75.js","142629428675168":"path---index-7019934553236f36cced.js","178698757827068":"path---404-html-a0e39f21c11f6a62c5ab.js","114276838955818":"component---src-layouts-index-js-bbab089550a358b83ffa.js"}/*]]>*/</script><script>/*<![CDATA[*/!function(e,t,r){function n(){for(;d[0]&&"loaded"==d[0][f];)c=d.shift(),c[o]=!i.parentNode.insertBefore(c,i)}for(var s,a,c,d=[],i=e.scripts[0],o="onreadystatechange",f="readyState";s=r.shift();)a=e.createElement(t),"async"in i?(a.async=!1,e.head.appendChild(a)):i[f]?(d.push(a),a[o]=n):e.write("<"+t+' src="'+s+'" defer></'+t+">"),a.src=s}(document,"script",["/commons-a6e237db30813b24a7cc.js","/app-a3030df141a9153ac7e9.js","/path---blog-2016-12-23-img-srcset-sizes-picture-3d88680e63edf1622620.js","/component---src-templates-blog-post-js-8bbdd4cf11c298accb24.js","/component---src-layouts-index-js-bbab089550a358b83ffa.js"])/*]]>*/</script></body></html>

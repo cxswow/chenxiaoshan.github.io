@@ -1,0 +1,2 @@
+webpackJsonp([0xb5977f2b0bd0],{353:function(t,e){t.exports={data:{site:{siteMetadata:{title:"cxswow OVO"}},allMarkdownRemark:{totalCount:1,edges:[{node:{fields:{slug:"/blog/2017-08-06-config-nginx-server-handbook"},frontmatter:{title:"使用 VisualBox、nginx 搭建双向验证的网站",date:"2017-08-06"}}}]}},pathContext:{tag:"Nginx"}}}});
+//# sourceMappingURL=path---blog-tags-nginx-616f7bfa347158df179b.js.map

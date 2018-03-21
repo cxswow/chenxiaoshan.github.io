@@ -1,0 +1,2 @@
+webpackJsonp([35922930818165],{351:function(t,e){t.exports={data:{site:{siteMetadata:{title:"cxswow OVO"}},allMarkdownRemark:{totalCount:1,edges:[{node:{fields:{slug:"/blog/2016-12-23-img-srcset-sizes-picture"},frontmatter:{title:"img 的 srcset、sizes 属性和 picture 元素",date:"2016-12-23"}}}]}},pathContext:{tag:"HTML"}}}});
+//# sourceMappingURL=path---blog-tags-html-8ab0ef81c3afb65dd9d9.js.map
