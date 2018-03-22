@@ -1,69 +1,75 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-// const profilePic = require("../images/kyle-round-small-pantheon.jpg")
-// import ReadNext from "../components/ReadNext"
-//import { query } from '../components/ReadNext'
-// const query = `
-// readNext___file {
-//   children {
-//     ... on MarkdownRemark {
-//       fields { slug }
-//       excerpt(pruneLength: 200)
-//       frontmatter {
-//         title
-//       }
-//     }
-//   }
-// }
-// `
+import styled from 'styled-components'
+
+const Post = styled.div`
+  margin: 1rem;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @media (min-width: 700px) {
+    width: 700px;
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+`
+
+const StyledP = styled.p`
+  color: #aaa;
+`
 
 class BlogPost extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
-    console.log(post)
 
     let tags
     let tagsSection
-    // if (this.props.data.markdownRemark.fields.tagSlugs) {
-    //   const tagsArray = this.props.data.markdownRemark.fields.tagSlugs
-    //   tags = tagsArray.map((tag, i) => {
-    //     const divider =
-    //       i < tagsArray.length - 1 &&
-    //       <span>
-    //         {" | "}
-    //       </span>
-    //     return (
-    //       <span key={tag}>
-    //         <Link to={tag}>
-    //           {this.props.data.markdownRemark.frontmatter.tags[i]}
-    //         </Link>
-    //         {divider}
-    //       </span>
-    //     )
-    //   })
-    //   tagsSection = (
-    //     <em>
-    //       Tagged with {tags}
-    //     </em>
-    //   )
-    // }
+    if (this.props.data.markdownRemark.fields.tagSlugs) {
+      const tagsArray = this.props.data.markdownRemark.fields.tagSlugs
+      tags = tagsArray.map((tag, i) => {
+        const divider =
+          i < tagsArray.length - 1 &&
+          <span>
+            {" | "}
+          </span>
+        return (
+          <span key={tag}>
+            <Link to={tag}>
+              {this.props.data.markdownRemark.frontmatter.tags[i]}
+            </Link>
+            {divider}
+          </span>
+        )
+      })
+      tagsSection = (
+        <em>
+          标签：{tags}
+        </em>
+      )
+    }
 
     return (
-      <div>
+      <Post>
         <Helmet
           title={`${post.frontmatter.title}`}
           meta={[{ name: "description", content: post.excerpt }]}
         />
-        <h1>
-          {post.frontmatter.title}
-        </h1>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        {tagsSection}
-        <p>
-          Posted {post.frontmatter.date}
-        </p>
-      </div>
+        <div>
+          <h1>
+            {post.frontmatter.title}
+          </h1>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          {tagsSection}
+          <StyledP>
+            {post.frontmatter.date}
+          </StyledP>
+        </div>
+      </Post>
     )
   }
 }
@@ -80,7 +86,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         tags
-        date(formatString: "MMMM DD, YYYY")
+        date
       }
     }
   }

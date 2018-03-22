@@ -2,8 +2,7 @@ import React from 'react'
 
 const NotFoundPage = () => (
   <div>
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <h1>这个页面可能被怪兽吃了OVO</h1>
   </div>
 )
 

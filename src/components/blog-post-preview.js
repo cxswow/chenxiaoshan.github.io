@@ -1,18 +1,15 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
-import logo from '../assets/logo.png'
 
 const Post = styled(Link)`
   position: relative;
-  margin: 1rem
+  margin: 1rem;
   width: 100%;
   padding: 1rem;
   background: #ffffff;
-  -webkit-box-shadow: 0.1px 0.1px 1px #000;
-  -moz-box-shadow: 0.1px 0.1px 1px #000;
-  box-shadow: 0.1px 0.1px 1px #000;
-  border-radius: 2rem;
+  border: 0.15rem solid black;
+  border-radius: 1rem;
 
   &:hover {
     -webkit-box-shadow: 0.5px 0.5px 20px #aaa;
@@ -29,6 +26,7 @@ const Post = styled(Link)`
     font-size: 1.4rem;
     font-weight: 500;
   }
+
 `
 
 const Ear = styled.div`

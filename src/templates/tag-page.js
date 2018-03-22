@@ -1,54 +1,102 @@
-import React from "react"
-import Link from "gatsby-link"
-import Helmet from "react-helmet"
+import React from 'react'
+import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
+import styled from 'styled-components'
+import kebabCase from 'lodash/kebabCase'
+import BlogPostPreview from '../components/blog-post-preview'
+import CatButton from '../components/cat-button'
 
-class TagRoute extends React.Component {
+const Posts = styled.div`
+  margin: 1rem;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+`
+
+const Div = styled.div`
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  pading: 0;
+  border: 0;
+  width: 100%;
+`
+
+const Tags = styled.div`
+  margin: 1em;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
+`
+
+class tagPage extends React.Component {
   render() {
-    //console.log(this.props)
-    const posts = this.props.data.allMarkdownRemark.edges
-    const title = this.props.data.site.siteMetadata.title
-    const postLinks = posts.map(post => {
-      return (
-        <li key={post.node.fields.slug}>
-          <Link to={post.node.fields.slug}>
-            {post.node.frontmatter.title}
-          </Link>
-        </li>
-      )
-    })
+    const posts = this.props.data.allmd.edges
+    const allTags = this.props.data.tagGroup.group
+    const curPath = this.props.location.pathname.split('/')
+    let selectedTag = curPath[curPath.length-1]
+    if (curPath.length > 1 && !selectedTag) selectedTag = curPath[curPath.length-2]
 
     return (
-      <div>
-        <Helmet title={title} />
-        <h2>
-          {this.props.data.allMarkdownRemark.totalCount} posts tagged with “{this.props.pathContext.tag}”
-        </h2>
-        <ul>
-          {postLinks}
-        </ul>
-        <p>
-          <Link to="/tags/">Browse all tags</Link>
-        </p>
-      </div>
+      <Div>
+        <Posts>
+          {posts.map(post =>
+            <BlogPostPreview
+              key={post.node.fields.slug}
+              post={post}
+            />
+          )}
+        </Posts>
+
+        <Tags>
+          <CatButton to='/blog'>All</CatButton>
+          {allTags.map(tag => {
+            if (kebabCase(tag.fieldValue) === selectedTag.toLowerCase())
+              return <CatButton
+                  key={tag.fieldValue}
+                  primary={true}
+                  to={`/blog/tags/${kebabCase(tag.fieldValue)}/`}
+                >
+                  {tag.fieldValue} ({tag.totalCount})
+                </CatButton>
+            else
+              return <CatButton
+                  key={tag.fieldValue}
+                  to={`/blog/tags/${kebabCase(tag.fieldValue)}/`}
+                >
+                  {tag.fieldValue} ({tag.totalCount})
+                </CatButton>
+            }
+          )}
+        </Tags>
+      </Div>
     )
   }
 }
 
-export default TagRoute
+export default tagPage
 
-export const pageQuery = graphql`
-  query TagPage($tag: String) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(
+export const tagPageIndexQuery = graphql`
+  query TagPageIndexQuery($tag: String) {
+    allmd: allMarkdownRemark(
       limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { order: DESC, fields: [frontmatter___date] }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
-      totalCount
       edges {
         node {
           fields {
@@ -56,8 +104,19 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
+            date
           }
         }
+      }
+    }
+
+    tagGroup: allMarkdownRemark(
+      limit: 1000
+      sort: { order: DESC, fields: [frontmatter___date] }
+    ) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
       }
     }
   }

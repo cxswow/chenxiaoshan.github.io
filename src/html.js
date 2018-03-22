@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './assets/logo.png'
+import logo from './assets/logo-black.png'
 
 let stylesStr
 if (process.env.NODE_ENV === `production`) {
@@ -33,7 +33,7 @@ export default class HTML extends React.Component {
             name='viewport'
             content='width=device-width, initial-scale=1.0'
           />
-          <link rel='icon' type='image/png' sizes='64x64' href={logo} />
+          <link rel='icon' type='image/png' sizes='64x54' href={logo} />
           {css}
         </head>
         <body {...this.props.bodyAttributes}>

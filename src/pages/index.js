@@ -5,6 +5,10 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 
 const IndexDiv = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border: 0;
   width: 100%;
   display: -webkit-flex;
   display: flex;
@@ -14,21 +18,40 @@ const IndexDiv = styled.div`
   font-family: Microsoft Yahei, Sans-serif;
   font-size: 16px;
   text-align: center;
-  line-height: 1.2 rem;
-  border: 0;
+  line-height: 1.2rem;
 
   a {
-    background: #3498db;
+    background: #000;
     color: #fff;
     width: 180px;
-    padding: 5px;
-    margin: 5px;
+    padding: 0.8rem;
+    margin: 0.5rem;
+  }
+`
+
+const Div = styled.div`
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 700px) {
+    width: 700px;
+  }
+
+  @media (max-width: 400px) {
+    width: 400px;
   }
 `
 
 const IndexButton = styled(Link)`
   textDecoration: none;
-  background: #3498db;
+  background: #000;
   color: #fff;
   width: 180px;
   padding: 5px;
@@ -36,8 +59,20 @@ const IndexButton = styled(Link)`
 `
 
 class IndexRoute extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      windowHeight: '0px',
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      windowHeight: window.innerheight+'px'
+    })
+  }
+
   render() {
-    console.log(this.props)
     const siteTitle = this.props.data.site.siteMetadata.title
 
     return (
@@ -48,6 +83,9 @@ class IndexRoute extends React.Component {
           to={'/blog'}
         >
           Blog
+        </IndexButton>
+        <IndexButton>
+          Coming soon...
         </IndexButton>
       </IndexDiv>
     )
