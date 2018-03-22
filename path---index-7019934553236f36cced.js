@@ -1,2 +1,2 @@
-webpackJsonp([0x81b8806e4260],{358:function(t,a){t.exports={data:{site:{siteMetadata:{title:"cxswow OVO",author:"cxswow"}}},pathContext:{}}}});
+webpackJsonp([0x81b8806e4260],{363:function(t,a){t.exports={data:{site:{siteMetadata:{title:"cxswow OVO",author:"cxswow"}}},pathContext:{}}}});
 //# sourceMappingURL=path---index-7019934553236f36cced.js.map
